@@ -5,23 +5,46 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Alessio Amaolo</title>
         <meta name="author" content="Alessio Amaolo"/>
-        <meta name="description" content="Alessio Amaolo is a PhD candidate at Princeton University working on fundamental limits and inverse design for nanophotonic devices."/>
+        <meta name="description" content="Alessio Amaolo is a PhD candidate at Princeton University working on fundamental limits and inverse design for nanophotonic devices. On the postdoc market, seeking positions starting Fall 2027."/>
         <link rel="canonical" href="https://alessioamaolo.github.io/"/>
         <meta property="og:type" content="website"/>
         <meta property="og:site_name" content="Alessio Amaolo"/>
         <meta property="og:title" content="Alessio Amaolo — PhD Candidate, Princeton University"/>
-        <meta property="og:description" content="Fundamental limits and inverse design for nanophotonic devices."/>
+        <meta property="og:description" content="Fundamental limits and inverse design for nanophotonic devices. On the postdoc market, seeking positions starting Fall 2027."/>
         <meta property="og:url" content="https://alessioamaolo.github.io/"/>
-        <meta property="og:image" content="https://alessioamaolo.github.io/images/headshot.jpg"/>
-        <meta property="og:image:alt" content="Alessio Amaolo"/>
-        <meta name="twitter:card" content="summary"/>
+        <meta property="og:image" content="https://alessioamaolo.github.io/images/og.png"/>
+        <meta property="og:image:type" content="image/png"/>
+        <meta property="og:image:width" content="1200"/>
+        <meta property="og:image:height" content="630"/>
+        <meta property="og:image:alt" content="Alessio Amaolo, PhD Candidate at Princeton University. On the postdoc market, seeking positions starting Fall 2027."/>
+        <meta name="twitter:card" content="summary_large_image"/>
         <meta name="theme-color" content="#f2f4f5" media="(prefers-color-scheme: light)"/>
         <meta name="theme-color" content="#14181a" media="(prefers-color-scheme: dark)"/>
 	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+        <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
         <style>
+            @font-face {
+                font-family: 'Newsreader'; font-style: normal; font-weight: 400 600; font-display: swap;
+                src: url(fonts/newsreader-latin.woff2) format('woff2');
+                unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+            }
+            @font-face {
+                font-family: 'Newsreader'; font-style: normal; font-weight: 400 600; font-display: swap;
+                src: url(fonts/newsreader-latin-ext.woff2) format('woff2');
+                unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+            }
+            @font-face {
+                font-family: 'Inter'; font-style: normal; font-weight: 400 600; font-display: swap;
+                src: url(fonts/inter-latin.woff2) format('woff2');
+                unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+            }
+            @font-face {
+                font-family: 'Inter'; font-style: normal; font-weight: 400 600; font-display: swap;
+                src: url(fonts/inter-latin-ext.woff2) format('woff2');
+                unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+            }
+
             :root {
                 --bg: #f2f4f5;
                 --surface: #ffffff;
@@ -102,6 +125,8 @@
             h2 {text-wrap: balance; font-family: var(--serif); font-weight: 500; letter-spacing: -.008em; font-size: 1.38rem; line-height: 1.3; margin: 0 0 .85rem;}
             h2::before {content: ""; display: block; width: 1.9rem; height: 2px; background: var(--accent); opacity: .85; margin-bottom: .8rem;}
             h3 {font-family: var(--serif); font-weight: 600; font-size: 1.02rem; margin: 0 0 .3rem;}
+            /* prose subheading: direct child of a section, so cards and group labels keep their own h3 */
+            section > h3 {font-size: 1.08rem; margin: 1.8rem 0 .5rem; scroll-margin-top: 4.6rem; text-wrap: balance;}
             p {margin: 0 0 .9rem; text-wrap: pretty;}
             section {margin-top: 2.9rem; scroll-margin-top: 4.6rem;}
             hr {border: 0; border-top: 1px solid var(--rule); margin: 2.2rem 0 0;}
@@ -200,6 +225,13 @@
             .card h3 a {text-decoration: none; color: var(--accent);}
             .card p {font-size: .89rem; line-height: 1.6; color: var(--muted); margin: 0;}
 
+            /* ---------- figures ---------- */
+            figure {margin: 1.5rem 0;}
+            figure img {display: block; width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 9px; background: var(--surface);}
+            figcaption {margin-top: .6rem; font-size: .86rem; line-height: 1.55; color: var(--muted); text-wrap: pretty;}
+            .figs {display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; margin: 1.5rem 0;}
+            .figs figure {margin: 0;}
+
             footer {display: flex; flex-wrap: wrap; gap: .4rem 1rem; justify-content: space-between; color: var(--muted); font-size: .88rem; padding-top: 1.4rem;}
             footer a {text-decoration: none; color: var(--muted);}
             footer a:hover {color: var(--accent);}
@@ -240,7 +272,7 @@
                             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 5h20v2.4l-10 5.6L2 7.4V5z"/><path d="M2 9.7l10 5.6 10-5.6V19H2V9.7z"/></svg>
                             <span>Email</span>
                         </a>
-                        <a href="CV_July_2026.pdf">
+                        <a href="cv.pdf">
                             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 2h8l6 6v14H5V2z"/></svg>
                             <span>CV</span>
                         </a>
@@ -266,9 +298,19 @@
             </p>
         </header>
 
+        <!-- Building blocks available inside any <section>. All CSS-only, no JS needed:
+               <h3>Subtitle</h3>                                             prose subheading
+               <p class="lead">...</p>                                       slightly larger intro paragraph
+               <ul class="plain"><li>...</li></ul>                           accent-tick list
+               <ul class="rows"><li><span class="key">label</span><span>...  two-column label + body rows
+               <div class="cards"><div class="card"><h3>...                  card grid (card titles render mono)
+               <figure><img src="images/x.png" alt=""><figcaption>...        figure with caption
+               <div class="figs"><figure>...</figure><figure>...             figures side by side
+               <a class="chip" href="...">1</a>                              small outlined link chip
+        -->
         <section id="research">
             <h2>Research Interests</h2>
-            <p class="lead"> I am interested in bounding nanophotonic device performance. I am currently working on developing new inverse design methods by leveraging information from fundamental limits. I am advised by <a href="https://arodriguez.princeton.edu/">Prof. Alejandro Rodriguez.</a> This website primarily exists to host my <a href="CV_July_2026.pdf">CV</a> and notes. </p>
+            <p class="lead"> I am interested in bounding nanophotonic device performance. I am currently working on developing new inverse design methods by leveraging information from fundamental limits. I am advised by <a href="https://arodriguez.princeton.edu/">Prof. Alejandro Rodriguez.</a> This website primarily exists to host my <a href="cv.pdf">CV</a> and notes. </p>
         </section>
 
         <section id="publications">
