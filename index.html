@@ -2,49 +2,140 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Alessio Amaolo</title>
-        <meta name="description" content=""/>
-        <link rel="canonical" href=""/>
+        <meta name="author" content="Alessio Amaolo"/>
+        <meta name="description" content="Alessio Amaolo is a Chemistry PhD candidate at Princeton University working on fundamental limits and inverse design for nanophotonic devices."/>
+        <link rel="canonical" href="https://alessioamaolo.github.io/"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:site_name" content="Alessio Amaolo"/>
+        <meta property="og:title" content="Alessio Amaolo — Chemistry PhD Candidate, Princeton University"/>
+        <meta property="og:description" content="Fundamental limits and inverse design for nanophotonic devices."/>
+        <meta property="og:url" content="https://alessioamaolo.github.io/"/>
+        <meta name="twitter:card" content="summary"/>
 	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>">
         <style>
-            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
-            code {background: white;}
-            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            :root {--bg: #f2f2f2; --fg: #444444; --muted: #6b6b6b; --rule: #d5d5d5; --code: #ffffff; --emboss: #ffffff;}
+            @media (prefers-color-scheme: dark) {
+                :root {--bg: #1b1b1b; --fg: #c9c9c9; --muted: #909090; --rule: #3a3a3a; --code: #262626; --emboss: transparent;}
+            }
+            * {box-sizing: border-box;}
+            body {margin: 0 auto; padding: clamp(2rem, 6vh, 4rem) clamp(1.1rem, 5vw, 2rem); max-width: 52rem; background: var(--bg); color: var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 var(--emboss);}
+            code {background: var(--code);}
+            a {border-bottom: 1px solid var(--fg); color: var(--fg); text-decoration: none;}
             a:hover {border-bottom: 0;}
+            hr {border: 0; border-top: 1px solid var(--rule); margin: 1.7rem 0;}
+            h1 {margin: 0 0 0.1rem; font-size: 2rem; line-height: 1.25;}
+            h2 {margin-top: 2.2rem; font-size: 1.25rem;}
+            header aside {color: var(--muted);}
+            .headline {display: flex; gap: 1.8rem; align-items: flex-start; justify-content: space-between;}
+            .headline img {width: 9rem; height: 9rem; border-radius: 50%; object-fit: cover; flex: none;}
+            @media (max-width: 34rem) {.headline {flex-direction: column-reverse; align-items: flex-start;}}
+            nav.links {display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 0.9rem; line-height: 1;}
+            nav.links a {display: inline-flex; align-items: center; gap: 0.45rem; border-bottom: 0;}
+            nav.links a:hover span {border-bottom: 1px solid var(--fg);}
+            nav.links svg {width: 1.15em; height: 1.15em; fill: currentColor; flex: none;}
+            ol.pubs {padding-left: 2.4rem;}
+            ol.pubs li {margin-bottom: 0.6rem;}
+            .venue {color: var(--muted);}
+            .note {color: var(--muted); font-size: 0.9rem;}
+            footer {color: var(--muted); font-size: 0.9rem;}
         </style>
     </head>
     <body>
         <header>
-            <h1>Alessio Amaolo</h1>
-            <aside>Chemistry PhD Candidate @ Princeton University (advised in Electrical and Computer Engineering)</aside>
+            <div class="headline">
+                <div>
+                    <h1>Alessio Amaolo</h1>
+                    <aside>Chemistry PhD Candidate @ Princeton University (advised in Electrical and Computer Engineering)</aside>
+                    <nav class="links">
+                        <a href="mailto:alessioamaolo@princeton.edu">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 5h20v2.4l-10 5.6L2 7.4V5z"/><path d="M2 9.7l10 5.6 10-5.6V19H2V9.7z"/></svg>
+                            <span>Email</span>
+                        </a>
+                        <a href="CV_July_2026.pdf">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 2h8l6 6v14H5V2z"/></svg>
+                            <span>CV</span>
+                        </a>
+                        <a href="https://scholar.google.com/citations?hl=en&amp;user=wW7wBxsAAAAJ&amp;view_op=list_works&amp;sortby=pubdate">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 1.6 0.8 8.4 12 15.2 23.2 8.4z"/><path d="M6.4 13.1 12 16.5l5.6-3.4v5.1L12 21.6l-5.6-3.4z"/></svg>
+                            <span>Google Scholar</span>
+                        </a>
+                        <a href="https://github.com/Alessio-Amaolo">
+                            <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A7.995 7.995 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://orcid.org/0000-0002-9973-6872">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="11"/><text x="12" y="16.6" text-anchor="middle" font-size="11" font-weight="700" fill="var(--bg)" font-family="Helvetica, Arial, sans-serif">iD</text></svg>
+                            <span>ORCID</span>
+                        </a>
+                    </nav>
+                </div>
+                <!-- TODO: drop a square headshot at images/headshot.jpg and uncomment.
+                <img src="images/headshot.jpg" alt="Alessio Amaolo" width="180" height="180"/>
+                -->
+            </div>
         </header> 
 	<hr>
 
         <h2>Research Interests</h2>
-	<p> I am interested in bounding nanophotonic device performance. I am currently working on developing new inverse design methods by leveraging information from fundamental limits. I am advised by <a href=https://arodriguez.princeton.edu/>Prof. Alejandro Rodriguez.</a> This website primarily exists to host my <a href="CV_web.pdf">CV</a> and notes. </p>
+	<p> I am interested in bounding nanophotonic device performance. I am currently working on developing new inverse design methods by leveraging information from fundamental limits. I am advised by <a href="https://arodriguez.princeton.edu/">Prof. Alejandro Rodriguez.</a> This website primarily exists to host my <a href="CV_July_2026.pdf">CV</a> and notes. </p>
         
 	<h2> Publications </h2>
-	I keep <a href=https://scholar.google.com/citations?hl=en&user=wW7wBxsAAAAJ&view_op=list_works&sortby=pubdate>Google Scholar</a> updated.
+	<p class="note">* indicates equal contribution. Also listed on <a href="https://scholar.google.com/citations?hl=en&amp;user=wW7wBxsAAAAJ&amp;view_op=list_works&amp;sortby=pubdate">Google Scholar</a>, which I keep updated.</p>
+	<ol class="pubs" reversed start="13">
+		<li> Meiburg, A., et al. (including <strong>Amaolo, A.</strong>). The Bound-Beating Benchmark: A continuous, lean-verified benchmark of open quantitative problems. <span class="venue">In preparation.</span> </li>
+		<li> <strong>Amaolo, A.</strong>, Molesky, S., Rodriguez, A.W., Johnson, S.G., Chao, P. The photonic gearbox: ultra-high Purcell enhancement via symmetry breaking. <span class="venue">In preparation.</span> </li>
+		<li> Chen, F.J., <strong>Amaolo, A.</strong>, Chao, P., Molesky, S., Lin, Z., Rodriguez, A.W. <a href="https://arxiv.org/abs/2607.13153">Optically Incoherent Photonic Mutual Information.</a> <span class="venue">arXiv:2607.13153, 2026.</span> </li>
+		<li> <strong>Amaolo, A.</strong>, Chen, F., Chao, P., Maldonado, T.J., Strekha, B., Molesky, S., Rodriguez, A.W. Optimal inverse design in nanophotonics: a tutorial. <span class="venue">Advances in Optics and Photonics (invited review paper). In preparation.</span> </li>
+		<li> Virally, P., Chao, P., <strong>Amaolo, A.</strong>, Rodriguez, A.W., Molesky, S. <a href="https://arxiv.org/abs/2510.01128">How many channels can a photonic system support?</a> <span class="venue">arXiv:2510.01128, 2025.</span> </li>
+		<li> Molesky, S., Chao, P., <strong>Amaolo, A.</strong>, Rodriguez, A.W. <a href="https://arxiv.org/abs/2504.14083">Inferring structure via duality for photonic inverse design.</a> <span class="venue">arXiv:2504.14083, 2025.</span> </li>
+		<li> Chao, P.*, <strong>Amaolo, A.</strong>*, Molesky, S., Rodriguez, A.W. <a href="https://opg.optica.org/oe/fulltext.cfm?uri=oe-34-5-7337">Bounds as blueprints: towards optimal and accelerated photonic inverse design.</a> <span class="venue">Optics Express, 2026.</span> </li>
+		<li> <strong>Amaolo, A.</strong>*, Chao, P.*, Strekha, B., Clarke, S., Mohajan, J., Molesky, S., Rodriguez, A.W. <a href="https://www.nature.com/articles/s44310-025-00104-2">Maximum Shannon capacity of photonic structures.</a> <span class="venue">npj Nanophotonics, 2026.</span> </li>
+		<li> Strekha, B., <strong>Amaolo, A.</strong>, Mohajan, J., Chao, P., Molesky, S., Rodriguez, A.W. <a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.110.063513">Limitations on bandwidth-integrated passive cloaking.</a> <span class="venue">Physical Review A, 2024.</span> </li>
+		<li> <strong>Amaolo, A.</strong>, Chao, P., Maldonado, T.J., Molesky, S., Rodriguez, A.W. <a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.110.L061501">Physical limits on Raman scattering: the critical role of pump and signal co-design.</a> <span class="venue">Physical Review A Letters, 2024.</span> </li>
+		<li> Maldonado, T.J., Pham, D.N., <strong>Amaolo, A.</strong>, Rodriguez, A.W., T&uuml;reci, H.E. <a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.110.014508">Negative electrohydrostatic pressure between superconducting bodies.</a> <span class="venue">Physical Review B, 2024.</span> </li>
+		<li> <strong>Amaolo, A.</strong>, Chao, P., Maldonado, T.J., Molesky, S., Rodriguez, A.W. <a href="https://www.degruyter.com/document/doi/10.1515/nanoph-2023-0606/html">Can photonic heterostructures provably outperform single-material geometries?</a> <span class="venue">Nanophotonics, 2024.</span> </li>
+		<li> McNicholas, B.J., Nie, C., Jose, A., Oyala, P.H., Takase, M.K., Henling, L.M., Barth, A.T., <strong>Amaolo, A.</strong>, Hadt, R.G., Solomon, E.I., Winkler, J.R., Gray, H.B., Despagnet-Ayoub, E. <a href="https://pubs.acs.org/doi/full/10.1021/acs.inorgchem.2c03066">Boronated Cyanometallates.</a> <span class="venue">Inorganic Chemistry, 2022.</span> </li>
+	</ol>
+
+	<h2> Invited Talks </h2>
+	<ul>
+		<li> &ldquo;Certificates of Suboptimality &amp; Opportunities for New Photonic Designs.&rdquo; <span class="venue">Photonics North, 2026.</span> </li>
+		<li> &ldquo;The photonic gearbox: ultra-high local density of states via cylindrical-symmetry breaking.&rdquo; <span class="venue">16th International Conference on Metamaterials, Photonic Crystals and Plasmonics, 2026.</span> </li>
+	</ul>
 
 	<h2> Code </h2>
-	Check out my <a href=https://github.com/Alessio-Amaolo>GitHub</a>. 
+	Check out my <a href="https://github.com/Alessio-Amaolo">GitHub</a>. 
 	Packages:
 	<ul>
-		<li>I am a core contributor / maintainer for <a href=https://github.com/PengningChao/dolphindes/tree/main>Dolphindes</a>, a recent library for calculation of photonic device performance bounds. Most of my newer publications use Dolphindes to some extent, and I use it as a repository for examples reproducing my results.
-		<li>I am working on <a href=https://github.com/Alessio-Amaolo/fluxmax>Fluxmax</a>, a highly parallelizable (via JAX SPMD distributed array sharding) optimization library for designing photonic metasurfaces for near-field radiative heat transfer (NFRHT). It is still a bit sparse but there will be a lot more code and examples soon.
+		<li>I am a core contributor / maintainer for <a href="https://github.com/physical-design-bounds/dolphindes/tree/main">Dolphindes</a>, a recent library for calculation of photonic device performance bounds. Most of my newer publications use Dolphindes to some extent, and I use it as a repository for examples reproducing my results. </li>
+		<li>I am working on <a href="https://github.com/Alessio-Amaolo/fluxmax">Fluxmax</a>, a highly parallelizable (via JAX SPMD distributed array sharding) optimization library for designing photonic metasurfaces for near-field radiative heat transfer (NFRHT). It is still a bit sparse but there will be a lot more code and examples soon. </li>
 	</ul>
 	Other Code:
 	<ul>
-		<li> <a href=https://github.com/physical-design-bounds/photonic_gearbox>Photonic Gearbox</a>: this small package implements the <a href=https://opg.optica.org/oe/fulltext.cfm?uri=oe-34-5-7629>Eigenvalue-accelerated LDOS optimization</a> in 2D polar coordinates to design compact ultra-high quality cavities. (Repo is still not public but will be soon) 
+		<li> <a href="https://github.com/physical-design-bounds/photonic_gearbox">Photonic Gearbox</a>: this small package implements the <a href="https://opg.optica.org/oe/fulltext.cfm?uri=oe-34-5-7629">Eigenvalue-accelerated LDOS optimization</a> in 2D polar coordinates to design compact ultra-high quality cavities. (Repo is still not public but will be soon) </li>
 	</ul>
 
 	<h2> Experience and Education </h2>
 	<ul>
+		<li> I am completing a PhD in Chemistry and Materials at Princeton, expected 2027. </li>
 		<li> I received a BS in Chemistry from Caltech in 2021. </li>
 		<li> I received an MA (pass with distinction) in Chemistry from Princeton in 2023. </li>
-		<li> Summer 2025 I was a student researcher at Google DeepMind. I worked on optimization techniques for mask process correction.
+		<li> Summer 2025 I was a student researcher at Google DeepMind. I worked on optimization techniques for mask process correction. </li>
 	</ul>
+
+	<h2> Awards </h2>
+	<ul>
+		<li> Princeton Chemistry Department David V. Milligan '62 Fellowship, awarded by faculty in recognition of academic excellence <span class="venue">(2021&ndash;2022)</span> </li>
+		<li> Reed and Ruth Brantley Research Fellowship <span class="venue">(Summer 2020)</span> </li>
+		<li> Doris S. Perpall SURF Speaking Competition semifinalist, top 10% of presentations <span class="venue">(2019)</span> </li>
+		<li> Donald Voet and Jerome Vinograd Research Fellowship <span class="venue">(Summer 2019)</span> </li>
+		<li> Dr. and Mrs. Daniel C. Harris Research Fellowship <span class="venue">(Summer 2018)</span> </li>
+	</ul>
+
+	<h2> Service </h2>
+	<p> Reviewer for <em>Journal of the Optical Society of America B</em>, <em>ACS Photonics</em>, <em>Computational and Applied Mathematics</em>, and <em>Science Advances</em>. </p>
 
 	<h2> Teaching </h2>
 	<ul>
@@ -62,14 +153,14 @@
 				<li> EGR153 (Foundations of Engineering: Electricity, Magnetism, and Photonics, 2024 and 2025). Teaching reviews: [<a href="images/egr153/egr153_1.png">1</a>, <a href="images/egr153/egr153_2.png">2</a>] </li>
 				<li> ECE453 (Optical and Quantum Electronics, 2024). Teaching reviews: [<a href="images/ece453/ECE453_reviews.png">1</a>] </li>
 				<li> ECE531 (Robot Planning Meets Machine Learning, 2025). No reviews (new course reviews are hidden for anonymity).</li>
-				<li> ECE203 (Electronic Circuit Design, Analysis and Implementation). Teaching review: [<a href="images/ece203/203_reviews.png">1</a>] </li>
+				<li> ECE203 (Electronic Circuit Design, Analysis and Implementation, 2026). Teaching review: [<a href="images/ece203/203_reviews.png">1</a>] </li>
 			</ul>
 		</li>
 	</ul>
 	<hr>
 	
 	<footer>
-				
+		Last updated August 2026.
     </footer>
     </body>
 </html>
