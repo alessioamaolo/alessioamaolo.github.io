@@ -12,42 +12,229 @@
         <meta property="og:title" content="Alessio Amaolo — PhD Candidate, Princeton University"/>
         <meta property="og:description" content="Fundamental limits and inverse design for nanophotonic devices."/>
         <meta property="og:url" content="https://alessioamaolo.github.io/"/>
+        <meta property="og:image" content="https://alessioamaolo.github.io/images/headshot.jpg"/>
+        <meta property="og:image:alt" content="Alessio Amaolo"/>
         <meta name="twitter:card" content="summary"/>
+        <meta name="theme-color" content="#f2f4f5" media="(prefers-color-scheme: light)"/>
+        <meta name="theme-color" content="#14181a" media="(prefers-color-scheme: dark)"/>
 	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
         <style>
-            :root {--bg: #f2f2f2; --fg: #444444; --muted: #6b6b6b; --rule: #d5d5d5; --code: #ffffff; --emboss: #ffffff;}
+            :root {
+                --bg: #f2f4f5;
+                --surface: #ffffff;
+                --fg: #20272b;
+                --muted: #636d73;
+                --rule: #d5dbde;
+                --rule-soft: #e3e8ea;
+                --accent: #0d5c6b;
+                --accent-soft: rgba(13, 92, 107, 0.085);
+                --accent-line: rgba(13, 92, 107, 0.32);
+                --shadow: 0 1px 2px rgba(22,30,34,.05), 0 10px 26px -14px rgba(22,30,34,.28);
+                --serif: "Newsreader", Georgia, "Times New Roman", serif;
+                --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+            }
             @media (prefers-color-scheme: dark) {
-                :root {--bg: #1b1b1b; --fg: #c9c9c9; --muted: #909090; --rule: #3a3a3a; --code: #262626; --emboss: transparent;}
+                :root {
+                    --bg: #14181a;
+                    --surface: #1d2225;
+                    --fg: #d1d7d9;
+                    --muted: #8a9398;
+                    --rule: #2f363a;
+                    --rule-soft: #252b2e;
+                    --accent: #5fb8c9;
+                    --accent-soft: rgba(95, 184, 201, 0.11);
+                    --accent-line: rgba(95, 184, 201, 0.34);
+                    --shadow: 0 1px 2px rgba(0,0,0,.32), 0 12px 32px -16px rgba(0,0,0,.75);
+                }
             }
             * {box-sizing: border-box;}
-            body {margin: 0 auto; padding: clamp(2rem, 6vh, 4rem) clamp(1.1rem, 5vw, 2rem); max-width: 52rem; background: var(--bg); color: var(--fg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 var(--emboss);}
-            code {background: var(--code);}
-            a {border-bottom: 1px solid var(--fg); color: var(--fg); text-decoration: none;}
-            a:hover {border-bottom: 0;}
-            hr {border: 0; border-top: 1px solid var(--rule); margin: 1.7rem 0;}
-            h1 {margin: 0 0 0.1rem; font-size: 2rem; line-height: 1.25;}
-            h2 {margin-top: 2.2rem; font-size: 1.25rem;}
-            header aside {color: var(--muted);}
-            .headline {display: flex; gap: 1.8rem; align-items: flex-start; justify-content: space-between;}
-            .headline img {width: 9rem; height: 9rem; border-radius: 50%; object-fit: cover; flex: none;}
-            @media (max-width: 34rem) {.headline {flex-direction: column-reverse; align-items: flex-start;}}
-            nav.links {display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 0.9rem; line-height: 1;}
-            nav.links a {display: inline-flex; align-items: center; gap: 0.45rem; border-bottom: 0;}
-            nav.links a:hover span {border-bottom: 1px solid var(--fg);}
-            nav.links svg {width: 1.15em; height: 1.15em; fill: currentColor; flex: none;}
-            ol.pubs {padding-left: 2.4rem;}
-            ol.pubs li {margin-bottom: 0.6rem;}
-            .venue {color: var(--muted);}
-            .note {color: var(--muted); font-size: 0.9rem;}
-            footer {color: var(--muted); font-size: 0.9rem;}
+            html {scroll-behavior: smooth;}
+            body {
+                margin: 0; padding: 0; overflow-x: hidden;
+                background: var(--bg); color: var(--fg);
+                font-family: var(--sans); font-size: 16.5px; line-height: 1.72;
+                -webkit-font-smoothing: antialiased;
+            }
+            ::selection {background: var(--accent-soft); color: var(--fg);}
+            .wrap {max-width: 52rem; margin: 0 auto; padding: 3.1rem clamp(1.1rem, 5vw, 2rem) clamp(2rem, 6vh, 3.5rem);}
+
+            /* ---------- sticky bar ---------- */
+            .bar {
+                position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+                height: 3.1rem; border-bottom: 1px solid transparent;
+                background: var(--bg);          /* matches the page, so it reads as bare at the top */
+                transition: background .25s ease, border-color .25s ease;
+            }
+            .bar > div {
+                display: flex; align-items: center; gap: 1.2rem; height: 100%;
+                max-width: 52rem; margin: 0 auto; padding: 0 clamp(1.1rem, 5vw, 2rem);
+            }
+            /* the rule only appears once there is something to separate from */
+            .bar.scrolled {border-bottom-color: var(--rule);}
+            @supports (backdrop-filter: blur(10px)) {
+                .bar.scrolled {background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px) saturate(1.4);}
+            }
+            /* the name takes over only once the real one has scrolled under the bar */
+            .bar .who {
+                font-family: var(--serif); font-size: 1.02rem; font-weight: 500;
+                margin-right: auto; white-space: nowrap;
+                opacity: 0; transform: translateY(-4px);
+                transition: opacity .25s ease, transform .25s ease;
+            }
+            .bar.named .who {opacity: 1; transform: none;}
+            .bar nav {display: flex; gap: 1.15rem; font-size: .86rem;}
+            .bar nav a {color: var(--muted); text-decoration: none;}
+            .bar nav a:hover {color: var(--accent);}
+            .bar .cta {
+                font-size: .84rem; padding: .34rem .8rem; border-radius: 999px;
+                border: 1px solid var(--accent-line); color: var(--accent);
+                text-decoration: none; white-space: nowrap;
+            }
+            .bar .cta:hover {background: var(--accent-soft);}
+            @media (max-width: 46rem) {.bar nav {display: none;}}
+
+            /* ---------- type ---------- */
+            h1 {text-wrap: balance; font-family: var(--serif); font-weight: 500; letter-spacing: -.018em; font-size: clamp(2.1rem, 6.4vw, 2.85rem); line-height: 1.1; margin: 0 0 .35rem;}
+            h2 {text-wrap: balance; font-family: var(--serif); font-weight: 500; letter-spacing: -.008em; font-size: 1.38rem; line-height: 1.3; margin: 0 0 .85rem;}
+            h2::before {content: ""; display: block; width: 1.9rem; height: 2px; background: var(--accent); opacity: .85; margin-bottom: .8rem;}
+            h3 {font-family: var(--serif); font-weight: 600; font-size: 1.02rem; margin: 0 0 .3rem;}
+            p {margin: 0 0 .9rem; text-wrap: pretty;}
+            section {margin-top: 2.9rem; scroll-margin-top: 4.6rem;}
+            hr {border: 0; border-top: 1px solid var(--rule); margin: 2.2rem 0 0;}
+            a {color: inherit; text-decoration: underline; text-decoration-color: var(--rule); text-decoration-thickness: 1px; text-underline-offset: .17em; transition: color .16s, text-decoration-color .16s;}
+            a:hover {color: var(--accent); text-decoration-color: var(--accent-line); text-decoration-thickness: 2px;}
+            a:focus-visible {outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px;}
+            .muted, .venue, .note {color: var(--muted);}
+            .venue {font-style: italic;}
+            .note {font-size: .88rem; margin-bottom: 1.1rem;}
+            .lead {font-size: 1.05rem;}
+
+            /* ---------- header ---------- */
+            header {padding-top: clamp(1.2rem, 3vh, 2rem);}
+            .headline {display: flex; gap: 2rem; align-items: flex-start; justify-content: space-between;}
+            .headline img {width: 9rem; height: 9rem; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 1px var(--rule), var(--shadow);}
+            .role {color: var(--muted); font-size: 1rem; margin: 0;}
+            @media (max-width: 34rem) {
+                .headline {flex-direction: column-reverse; align-items: flex-start; gap: 1.2rem;}
+                .headline img {width: 6.5rem; height: 6.5rem;}
+            }
+
+            /* ---------- availability ---------- */
+            .status {
+                display: flex; flex-wrap: nowrap; align-items: flex-start; gap: .55rem;
+                margin: 1.1rem 0 0; padding: .62rem .9rem .62rem .85rem;
+                background: var(--accent-soft); border: 1px solid var(--accent-line);
+                border-radius: 10px; font-size: .95rem; line-height: 1.55;
+            }
+            .status strong {font-weight: 600; color: var(--accent);}
+            .status a {color: var(--accent); text-decoration-color: var(--accent-line);}
+            .dot {flex: none; width: .5rem; height: .5rem; margin-top: .48em; border-radius: 50%; background: var(--accent);}
+
+            /* ---------- link pills ---------- */
+            nav.links {display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.05rem;}
+            nav.links a {
+                display: inline-flex; align-items: center; gap: .45rem;
+                padding: .38rem .78rem; border: 1px solid var(--rule); border-radius: 999px;
+                background: var(--surface); font-size: .88rem; line-height: 1.3;
+                text-decoration: none; transition: color .16s, border-color .16s, transform .16s, box-shadow .16s;
+            }
+            nav.links a:hover {color: var(--accent); border-color: var(--accent-line); transform: translateY(-1px); box-shadow: var(--shadow);}
+            nav.links svg {width: 1.05em; height: 1.05em; fill: currentColor; flex: none;}
+
+            /* ---------- publications ---------- */
+            ol.pubs {list-style: none; padding: 0; margin: 0; counter-reset: pub 14;}
+            ol.pubs li {
+                text-wrap: pretty;
+                counter-increment: pub -1; position: relative;
+                padding: .5rem .75rem .5rem 3.1rem; margin: 0 -.75rem;
+                border-radius: 9px; transition: background .18s;
+            }
+            ol.pubs li::before {
+                content: counter(pub); position: absolute; left: .75rem; top: .78rem;
+                width: 1.5rem; text-align: right;
+                font-family: var(--mono); font-size: .78rem; color: var(--accent); opacity: .8;
+                font-variant-numeric: tabular-nums;
+            }
+            ol.pubs li.linked {cursor: pointer;}
+            ol.pubs li.linked:hover {background: var(--accent-soft);}
+
+            /* ---------- generic tick list ---------- */
+            ul.plain {list-style: none; padding: 0; margin: 0;}
+            ul.plain > li {position: relative; padding-left: 1.15rem; margin: .55rem 0;}
+            ul.plain > li::before {content: ""; position: absolute; left: 0; top: .82em; width: .45rem; height: 1px; background: var(--accent); opacity: .8;}
+
+            /* ---------- row lists (education, teaching) ---------- */
+            ul.rows {list-style: none; padding: 0; margin: 0;}
+            ul.rows > li {display: grid; grid-template-columns: 6.4rem 1fr; gap: .15rem 1rem; padding: .55rem 0; border-top: 1px solid var(--rule-soft);}
+            ul.rows > li:first-child {border-top: 0; padding-top: .1rem;}
+            .key {font-family: var(--mono); font-size: .82rem; color: var(--accent); padding-top: .34em; letter-spacing: .005em;}
+            @media (max-width: 30rem) {
+                ul.rows > li {grid-template-columns: 1fr; gap: .05rem;}
+                .key {padding-top: 0;}
+            }
+            .group {margin-top: 1.5rem;}
+            .group:first-of-type {margin-top: .4rem;}
+            .group > h3 {color: var(--muted); font-family: var(--sans); font-size: .76rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; margin-bottom: .5rem;}
+
+            /* ---------- chips ---------- */
+            .chip {
+                display: inline-block; min-width: 1.5em; text-align: center; font-size: .72rem; line-height: 1; padding: .3em .5em;
+                border: 1px solid var(--rule); border-radius: 5px; color: var(--muted);
+                text-decoration: none; margin: .18rem .18rem 0 0; vertical-align: .08em;
+                transition: color .16s, border-color .16s;
+            }
+            .chip:hover {color: var(--accent); border-color: var(--accent-line);}
+
+            /* ---------- cards ---------- */
+            .cards {display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: .8rem; margin: 0 0 1rem;}
+            .card {
+                padding: .95rem 1.05rem; border: 1px solid var(--rule); border-radius: 11px;
+                background: var(--surface); transition: border-color .18s, transform .18s, box-shadow .18s;
+            }
+            .card:hover {border-color: var(--accent-line); transform: translateY(-2px); box-shadow: var(--shadow);}
+            .card h3 {font-family: var(--mono); font-size: .92rem; font-weight: 500; letter-spacing: -.01em;}
+            .card h3 a {text-decoration: none; color: var(--accent);}
+            .card p {font-size: .89rem; line-height: 1.6; color: var(--muted); margin: 0;}
+
+            footer {display: flex; flex-wrap: wrap; gap: .4rem 1rem; justify-content: space-between; color: var(--muted); font-size: .88rem; padding-top: 1.4rem;}
+            footer a {text-decoration: none; color: var(--muted);}
+            footer a:hover {color: var(--accent);}
+
+            @media (prefers-reduced-motion: reduce) {
+                html {scroll-behavior: auto;}
+                *, *::before, *::after {animation-duration: .01s !important; animation-delay: 0s !important; transition-duration: .01s !important;}
+            }
+            @media print {
+                .bar, nav.links, .status {display: none !important;}
+                body {font-size: 10.5pt; background: #fff; color: #000;}
+                a {text-decoration: none;}
+            }
         </style>
     </head>
     <body>
+        <div class="bar" id="bar">
+            <div>
+                <span class="who">Alessio Amaolo</span>
+                <nav>
+                    <a href="#research">Research</a>
+                    <a href="#publications">Publications</a>
+                    <a href="#code">Code</a>
+                    <a href="#teaching">Teaching</a>
+                </nav>
+                <a class="cta" href="mailto:alessioamaolo@princeton.edu">Email me</a>
+            </div>
+        </div>
+
+        <main class="wrap">
         <header>
             <div class="headline">
                 <div>
                     <h1>Alessio Amaolo</h1>
-                    <aside>PhD Candidate @ Princeton University (advised in Electrical and Computer Engineering)</aside>
+                    <p class="role">PhD Candidate @ Princeton University (advised in Electrical and Computer Engineering)</p>
                     <nav class="links">
                         <a href="mailto:alessioamaolo@princeton.edu">
                             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 5h20v2.4l-10 5.6L2 7.4V5z"/><path d="M2 9.7l10 5.6 10-5.6V19H2V9.7z"/></svg>
@@ -73,15 +260,21 @@
                 </div>
                 <img src="images/headshot.jpg" alt="Alessio Amaolo" width="180" height="180"/>
             </div>
-        </header> 
-	<hr>
+            <p class="status">
+                <span class="dot"></span>
+                <span><strong>On the postdoc market.</strong> Seeking positions starting Fall 2027. <a href="mailto:alessioamaolo@princeton.edu">alessioamaolo@princeton.edu</a></span>
+            </p>
+        </header>
 
-        <h2>Research Interests</h2>
-	<p> I am interested in bounding nanophotonic device performance. I am currently working on developing new inverse design methods by leveraging information from fundamental limits. I am advised by <a href="https://arodriguez.princeton.edu/">Prof. Alejandro Rodriguez.</a> This website primarily exists to host my <a href="CV_July_2026.pdf">CV</a> and notes. </p>
-        
-	<h2> Publications </h2>
-	<p class="note">* indicates equal contribution. Also listed on <a href="https://scholar.google.com/citations?hl=en&amp;user=wW7wBxsAAAAJ&amp;view_op=list_works&amp;sortby=pubdate">Google Scholar</a>, which I keep updated.</p>
-	<ol class="pubs" reversed start="13">
+        <section id="research">
+            <h2>Research Interests</h2>
+            <p class="lead"> I am interested in bounding nanophotonic device performance. I am currently working on developing new inverse design methods by leveraging information from fundamental limits. I am advised by <a href="https://arodriguez.princeton.edu/">Prof. Alejandro Rodriguez.</a> This website primarily exists to host my <a href="CV_July_2026.pdf">CV</a> and notes. </p>
+        </section>
+
+        <section id="publications">
+            <h2>Publications</h2>
+            <p class="note">* indicates equal contribution. Also listed on <a href="https://scholar.google.com/citations?hl=en&amp;user=wW7wBxsAAAAJ&amp;view_op=list_works&amp;sortby=pubdate">Google Scholar</a>, which I keep updated.</p>
+            <ol class="pubs" reversed start="13">
 		<li> Meiburg, A., et al. (including <strong>Amaolo, A.</strong>). The Bound-Beating Benchmark: A continuous, lean-verified benchmark of open quantitative problems. <span class="venue">In preparation.</span> </li>
 		<li> <strong>Amaolo, A.</strong>, Molesky, S., Rodriguez, A.W., Johnson, S.G., Chao, P. The photonic gearbox: ultra-high Purcell enhancement via symmetry breaking. <span class="venue">In preparation.</span> </li>
 		<li> Chen, F.J., <strong>Amaolo, A.</strong>, Chao, P., Molesky, S., Lin, Z., Rodriguez, A.W. <a href="https://arxiv.org/abs/2607.13153">Optically Incoherent Photonic Mutual Information.</a> <span class="venue">arXiv:2607.13153, 2026.</span> </li>
@@ -95,62 +288,109 @@
 		<li> Maldonado, T.J., Pham, D.N., <strong>Amaolo, A.</strong>, Rodriguez, A.W., T&uuml;reci, H.E. <a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.110.014508">Negative electrohydrostatic pressure between superconducting bodies.</a> <span class="venue">Physical Review B, 2024.</span> </li>
 		<li> <strong>Amaolo, A.</strong>, Chao, P., Maldonado, T.J., Molesky, S., Rodriguez, A.W. <a href="https://www.degruyter.com/document/doi/10.1515/nanoph-2023-0606/html">Can photonic heterostructures provably outperform single-material geometries?</a> <span class="venue">Nanophotonics, 2024.</span> </li>
 		<li> McNicholas, B.J., Nie, C., Jose, A., Oyala, P.H., Takase, M.K., Henling, L.M., Barth, A.T., <strong>Amaolo, A.</strong>, Hadt, R.G., Solomon, E.I., Winkler, J.R., Gray, H.B., Despagnet-Ayoub, E. <a href="https://pubs.acs.org/doi/full/10.1021/acs.inorgchem.2c03066">Boronated Cyanometallates.</a> <span class="venue">Inorganic Chemistry, 2022.</span> </li>
-	</ol>
+	    </ol>
+        </section>
 
-	<h2> Invited Talks </h2>
-	<ul>
+        <section id="talks">
+            <h2>Invited Talks</h2>
+            <ul class="plain">
 		<li> <a href="https://congress.metamorphose-vi.org/index.php/component/svisor/?task=showScheduleSvisor&amp;Itemid=156">&ldquo;Communicating through waves: How many optical channels can a photonic device support?&rdquo;</a> <span class="venue">Metamaterials'2026 (20th International Congress on Artificial Materials for Novel Wave Phenomena), New York, 2026.</span> </li>
 		<li> &ldquo;Certificates of Suboptimality &amp; Opportunities for New Photonic Designs.&rdquo; <span class="venue">Photonics North, 2026.</span> </li>
 		<li> <a href="https://metaconferences.org/META26/index.php/META/program">&ldquo;The photonic gearbox: ultra-high local density of states via cylindrical-symmetry breaking.&rdquo;</a> <span class="venue">16th International Conference on Metamaterials, Photonic Crystals and Plasmonics, 2026.</span> </li>
-	</ul>
+	    </ul>
+        </section>
 
-	<h2> Code </h2>
-	Check out my <a href="https://github.com/Alessio-Amaolo">GitHub</a>. 
-	Packages:
-	<ul>
-		<li>I am a core contributor / maintainer for <a href="https://github.com/physical-design-bounds/dolphindes/tree/main">Dolphindes</a>, a recent library for calculation of photonic device performance bounds. Most of my newer publications use Dolphindes to some extent, and I use it as a repository for examples reproducing my results. </li>
-		<li>I am working on <a href="https://github.com/Alessio-Amaolo/fluxmax">Fluxmax</a>, a highly parallelizable (via JAX SPMD distributed array sharding) optimization library for designing photonic metasurfaces for near-field radiative heat transfer (NFRHT). It is still a bit sparse but there will be a lot more code and examples soon. </li>
-	</ul>
-	Other Code:
-	<ul>
-		<li> <a href="https://github.com/physical-design-bounds/photonic_gearbox">Photonic Gearbox</a>: this small package implements the <a href="https://opg.optica.org/oe/fulltext.cfm?uri=oe-34-5-7629">Eigenvalue-accelerated LDOS optimization</a> in 2D polar coordinates to design compact ultra-high quality cavities. (Repo is still not public but will be soon) </li>
-	</ul>
+        <section id="code">
+            <h2>Code</h2>
+            <p class="note">Everything lives on my <a href="https://github.com/Alessio-Amaolo">GitHub</a>.</p>
+            <div class="cards">
+                <div class="card">
+                    <h3><a href="https://github.com/physical-design-bounds/dolphindes/tree/main">dolphindes</a></h3>
+                    <p>A recent library for calculation of photonic device performance bounds. I am a core contributor / maintainer. Most of my newer publications use Dolphindes to some extent, and I use it as a repository for examples reproducing my results.</p>
+                </div>
+                <div class="card">
+                    <h3><a href="https://github.com/Alessio-Amaolo/fluxmax">fluxmax</a></h3>
+                    <p>A highly parallelizable (via JAX SPMD distributed array sharding) optimization library for designing photonic metasurfaces for near-field radiative heat transfer (NFRHT). Still a bit sparse, but there will be a lot more code and examples soon.</p>
+                </div>
+                <div class="card">
+                    <h3><a href="https://github.com/physical-design-bounds/photonic_gearbox">photonic_gearbox</a></h3>
+                    <p>Implements the <a href="https://opg.optica.org/oe/fulltext.cfm?uri=oe-34-5-7629">eigenvalue-accelerated LDOS optimization</a> in 2D polar coordinates to design compact ultra-high quality cavities. (Repo is still not public but will be soon.)</p>
+                </div>
+            </div>
+        </section>
 
-	<h2> Experience and Education </h2>
-	<ul>
-		<li> I am completing a PhD in Chemistry and Materials at Princeton, expected 2027. </li>
-		<li> I received a BS in Chemistry from Caltech in 2021. </li>
-		<li> I received an MA (pass with distinction) in Chemistry from Princeton in 2023. </li>
-		<li> Summer 2025 I was a student researcher at Google DeepMind. I worked on optimization techniques for mask process correction. </li>
-	</ul>
+        <section id="about">
+            <h2>Experience and Education</h2>
+            <ul class="rows">
+                <li><span class="key">2027 exp.</span><span>PhD in Chemistry and Materials, Princeton University <span class="muted">(in progress)</span></span></li>
+                <li><span class="key">2025</span><span>Student Researcher, Google DeepMind. <span class="muted">Optimization techniques for mask process correction (Summer 2025).</span></span></li>
+                <li><span class="key">2023</span><span>MA in Chemistry, Princeton University <span class="muted">(pass with distinction)</span></span></li>
+                <li><span class="key">2021</span><span>BS in Chemistry, Caltech</span></li>
+            </ul>
+        </section>
 
-	<h2> Service </h2>
-	<p> Reviewer for <em>Journal of the Optical Society of America B</em>, <em>ACS Photonics</em>, <em>Computational and Applied Mathematics</em>, and <em>Science Advances</em>. </p>
+        <section id="service">
+            <h2>Service</h2>
+            <p> Reviewer for <em>Journal of the Optical Society of America B</em>, <em>ACS Photonics</em>, <em>Computational and Applied Mathematics</em>, and <em>Science Advances</em>. </p>
+        </section>
 
-	<h2> Teaching </h2>
-	<ul>
-		<li> At Caltech I TA'd:
-			<ul>
-				<li> Ch21a (Physical Chemistry) with Prof. Garnet Chan (2019). I wrote some <a href="Ch21_Notes.pdf">notes</a> for the class. </li>	
-				<li> Ph12c (Statistical Mechanics) with Prof. Ryan Patterson (2021). I saved my <a href="images/ph12/ph12creviews.png">teaching reviews.</a> </li>
-			</ul>
-		</li>
-		<li> At Princeton I TA'd:
-			<ul>
-				<li> CHM201 (General Chemistry, 2022). Teaching reviews: [<a href="images/chm201/genchemreview1.png">1</a>, <a href="images/chm201/genchemreview2.png">2</a>, <a href="images/chm201/genchemreview3.png">3</a>] </li>
-				<li> PHY106 (Electromagnetism, 2023). Teaching reviews: [<a href="images/phy106/ph106review3.png">1</a>, <a href="images/phy106/ph106review2.png">2</a>] </li>
-				<li> EEB211 (Introductory Biology and Ecology, 2023). Teaching reviews: [<a href="images/eeb211/EEB211_Feedback_1.png">1</a>, <a href="images/eeb211/EEB211_Feedback_2.png">2</a>]  </li>
-				<li> EGR153 (Foundations of Engineering: Electricity, Magnetism, and Photonics, 2024 and 2025). Teaching reviews: [<a href="images/egr153/egr153_1.png">1</a>, <a href="images/egr153/egr153_2.png">2</a>] </li>
-				<li> ECE453 (Optical and Quantum Electronics, 2024). Teaching reviews: [<a href="images/ece453/ECE453_reviews.png">1</a>] </li>
-				<li> ECE531 (Robot Planning Meets Machine Learning, 2025). No reviews (new course reviews are hidden for anonymity).</li>
-				<li> ECE203 (Electronic Circuit Design, Analysis and Implementation, 2026). Teaching review: [<a href="images/ece203/203_reviews.png">1</a>] </li>
-			</ul>
-		</li>
-	</ul>
+        <section id="teaching">
+            <h2>Teaching</h2>
+            <div class="group">
+                <h3>Caltech</h3>
+                <ul class="rows">
+                    <li><span class="key">Ch21a</span><span>Physical Chemistry, with Prof. Garnet Chan (2019). I wrote some <a href="Ch21_Notes.pdf">notes</a> for the class.</span></li>
+                    <li><span class="key">Ph12c</span><span>Statistical Mechanics, with Prof. Ryan Patterson (2021). <span class="muted">reviews</span> <a class="chip" href="images/ph12/ph12creviews.png">1</a></span></li>
+                </ul>
+            </div>
+            <div class="group">
+                <h3>Princeton</h3>
+                <ul class="rows">
+                    <li><span class="key">ECE203</span><span>Electronic Circuit Design, Analysis and Implementation (2026). <span class="muted">reviews</span> <a class="chip" href="images/ece203/203_reviews.png">1</a></span></li>
+                    <li><span class="key">ECE531</span><span>Robot Planning Meets Machine Learning (2025). <span class="muted">No reviews (new course reviews are hidden for anonymity).</span></span></li>
+                    <li><span class="key">EGR153</span><span>Foundations of Engineering: Electricity, Magnetism, and Photonics (2024 and 2025). <span class="muted">reviews</span> <a class="chip" href="images/egr153/egr153_1.png">1</a><a class="chip" href="images/egr153/egr153_2.png">2</a></span></li>
+                    <li><span class="key">ECE453</span><span>Optical and Quantum Electronics (2024). <span class="muted">reviews</span> <a class="chip" href="images/ece453/ECE453_reviews.png">1</a></span></li>
+                    <li><span class="key">PHY106</span><span>Electromagnetism (2023). <span class="muted">reviews</span> <a class="chip" href="images/phy106/ph106review3.png">1</a><a class="chip" href="images/phy106/ph106review2.png">2</a></span></li>
+                    <li><span class="key">EEB211</span><span>Introductory Biology and Ecology (2023). <span class="muted">reviews</span> <a class="chip" href="images/eeb211/EEB211_Feedback_1.png">1</a><a class="chip" href="images/eeb211/EEB211_Feedback_2.png">2</a></span></li>
+                    <li><span class="key">CHM201</span><span>General Chemistry (2022). <span class="muted">reviews</span> <a class="chip" href="images/chm201/genchemreview1.png">1</a><a class="chip" href="images/chm201/genchemreview2.png">2</a><a class="chip" href="images/chm201/genchemreview3.png">3</a></span></li>
+                </ul>
+            </div>
+        </section>
+
 	<hr>
-	
 	<footer>
-		Last updated August 2026.
-    </footer>
+            <span>Last updated August 2026.</span>
+            <a href="#">Back to top &uarr;</a>
+	</footer>
+        </main>
+
+        <script>
+        (function () {
+            /* ---- top bar: solid once scrolled, name once the real one is gone ---- */
+            var bar = document.getElementById('bar');
+            var title = document.querySelector('header h1');
+            var onScroll = function () {
+                bar.classList.toggle('scrolled', window.scrollY > 4);
+                bar.classList.toggle('named', title.getBoundingClientRect().bottom < bar.offsetHeight);
+            };
+            addEventListener('scroll', onScroll, {passive: true});
+            addEventListener('resize', onScroll, {passive: true});
+            onScroll();
+
+            /* ---- whole publication row is clickable when it links somewhere ---- */
+            document.querySelectorAll('ol.pubs > li').forEach(function (li) {
+                var a = li.querySelector('a[href]');
+                if (!a) return;
+                li.classList.add('linked');
+                li.addEventListener('click', function (e) {
+                    if (e.target.closest('a')) return;                 /* real links act normally */
+                    var sel = window.getSelection();
+                    if (sel && !sel.isCollapsed) return;               /* don't hijack text selection */
+                    if (e.metaKey || e.ctrlKey || e.shiftKey) window.open(a.href, '_blank', 'noopener');
+                    else window.location.href = a.href;
+                });
+            });
+        })();
+        </script>
     </body>
 </html>
