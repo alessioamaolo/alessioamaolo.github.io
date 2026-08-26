@@ -21,19 +21,8 @@
         <meta name="theme-color" content="#f2f4f5" media="(prefers-color-scheme: light)"/>
         <meta name="theme-color" content="#14181a" media="(prefers-color-scheme: dark)"/>
 	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>">
-        <link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
         <style>
-            @font-face {
-                font-family: 'Newsreader'; font-style: normal; font-weight: 400 600; font-display: swap;
-                src: url(fonts/newsreader-latin.woff2) format('woff2');
-                unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-            }
-            @font-face {
-                font-family: 'Newsreader'; font-style: normal; font-weight: 400 600; font-display: swap;
-                src: url(fonts/newsreader-latin-ext.woff2) format('woff2');
-                unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-            }
             @font-face {
                 font-family: 'Inter'; font-style: normal; font-weight: 400 600; font-display: swap;
                 src: url(fonts/inter-latin.woff2) format('woff2');
@@ -55,8 +44,7 @@
                 --accent: #0d5c6b;
                 --accent-soft: rgba(13, 92, 107, 0.085);
                 --accent-line: rgba(13, 92, 107, 0.32);
-                --shadow: 0 1px 2px rgba(22,30,34,.05), 0 10px 26px -14px rgba(22,30,34,.28);
-                --serif: "Newsreader", Georgia, "Times New Roman", serif;
+                --accent-glow: rgba(13, 92, 107, 0.20);
                 --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
             }
@@ -71,7 +59,7 @@
                     --accent: #5fb8c9;
                     --accent-soft: rgba(95, 184, 201, 0.11);
                     --accent-line: rgba(95, 184, 201, 0.34);
-                    --shadow: 0 1px 2px rgba(0,0,0,.32), 0 12px 32px -16px rgba(0,0,0,.75);
+                    --accent-glow: rgba(95, 184, 201, 0.22);
                 }
             }
             * {box-sizing: border-box;}
@@ -103,7 +91,7 @@
             }
             /* the name takes over only once the real one has scrolled under the bar */
             .bar .who {
-                font-family: var(--serif); font-size: 1.02rem; font-weight: 500;
+                font-size: .98rem; font-weight: 600; letter-spacing: -.015em;
                 margin-right: auto; white-space: nowrap;
                 opacity: 0; transform: translateY(-4px);
                 transition: opacity .25s ease, transform .25s ease;
@@ -121,12 +109,11 @@
             @media (max-width: 46rem) {.bar nav {display: none;}}
 
             /* ---------- type ---------- */
-            h1 {text-wrap: balance; font-family: var(--serif); font-weight: 500; letter-spacing: -.018em; font-size: clamp(2.1rem, 6.4vw, 2.85rem); line-height: 1.1; margin: 0 0 .35rem;}
-            h2 {text-wrap: balance; font-family: var(--serif); font-weight: 500; letter-spacing: -.008em; font-size: 1.38rem; line-height: 1.3; margin: 0 0 .85rem;}
-            h2::before {content: ""; display: block; width: 1.9rem; height: 2px; background: var(--accent); opacity: .85; margin-bottom: .8rem;}
-            h3 {font-family: var(--serif); font-weight: 600; font-size: 1.02rem; margin: 0 0 .3rem;}
+            h1 {text-wrap: balance; font-weight: 600; letter-spacing: -.025em; font-size: clamp(2rem, 6vw, 2.6rem); line-height: 1.12; margin: 0 0 .35rem;}
+            h2 {text-wrap: balance; font-weight: 600; letter-spacing: -.02em; font-size: 1.5rem; line-height: 1.25; margin: 0 0 .85rem;}
+            h3 {font-weight: 600; font-size: 1.02rem; margin: 0 0 .3rem;}
             /* prose subheading: direct child of a section, so cards and group labels keep their own h3 */
-            section > h3 {font-size: 1.08rem; margin: 1.8rem 0 .5rem; scroll-margin-top: 4.6rem; text-wrap: balance;}
+            section > h3 {font-size: 1.04rem; margin: 1.8rem 0 .5rem; scroll-margin-top: 4.6rem; text-wrap: balance;}
             p {margin: 0 0 .9rem; text-wrap: pretty;}
             section {margin-top: 2.9rem; scroll-margin-top: 4.6rem;}
             hr {border: 0; border-top: 1px solid var(--rule); margin: 2.2rem 0 0;}
@@ -141,7 +128,7 @@
             /* ---------- header ---------- */
             header {padding-top: clamp(1.2rem, 3vh, 2rem);}
             .headline {display: flex; gap: 2rem; align-items: flex-start; justify-content: space-between;}
-            .headline img {width: 9rem; height: 9rem; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 1px var(--rule), var(--shadow);}
+            .headline img {width: 9rem; height: 9rem; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 1px var(--rule);}
             .role {color: var(--muted); font-size: 1rem; margin: 0;}
             @media (max-width: 34rem) {
                 .headline {flex-direction: column-reverse; align-items: flex-start; gap: 1.2rem;}
@@ -165,9 +152,9 @@
                 display: inline-flex; align-items: center; gap: .45rem;
                 padding: .38rem .78rem; border: 1px solid var(--rule); border-radius: 999px;
                 background: var(--surface); font-size: .88rem; line-height: 1.3;
-                text-decoration: none; transition: color .16s, border-color .16s, transform .16s, box-shadow .16s;
+                text-decoration: none; transition: color .16s, border-color .16s;
             }
-            nav.links a:hover {color: var(--accent); border-color: var(--accent-line); transform: translateY(-1px); box-shadow: var(--shadow);}
+            nav.links a:hover {color: var(--accent); border-color: var(--accent-line);}
             nav.links svg {width: 1.05em; height: 1.05em; fill: currentColor; flex: none;}
 
             /* ---------- publications ---------- */
@@ -177,7 +164,14 @@
                 counter-increment: pub -1; position: relative;
                 padding: .5rem .75rem .5rem 3.1rem; margin: 0 -.75rem;
                 border-radius: 9px; transition: background .18s;
+                scroll-margin-top: 4.6rem;
             }
+            /* arriving from a citation link: one-shot glow, no JS */
+            @keyframes cite-glow {
+                from {background: var(--accent-glow); box-shadow: 0 0 0 1px var(--accent-line);}
+                to   {background: transparent;        box-shadow: 0 0 0 1px transparent;}
+            }
+            ol.pubs li:target {animation: cite-glow 2.4s ease-out 1;}
             ol.pubs li::before {
                 content: counter(pub); position: absolute; left: .75rem; top: .78rem;
                 width: 1.5rem; text-align: right;
@@ -203,7 +197,7 @@
             }
             .group {margin-top: 1.5rem;}
             .group:first-of-type {margin-top: .4rem;}
-            .group > h3 {color: var(--muted); font-family: var(--sans); font-size: .76rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; margin-bottom: .5rem;}
+            .group > h3 {color: var(--muted); font-size: .76rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; margin-bottom: .5rem;}
 
             /* ---------- chips ---------- */
             .chip {
@@ -218,17 +212,31 @@
             .cards {display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: .8rem; margin: 0 0 1rem;}
             .card {
                 padding: .95rem 1.05rem; border: 1px solid var(--rule); border-radius: 11px;
-                background: var(--surface); transition: border-color .18s, transform .18s, box-shadow .18s;
+                background: var(--surface); transition: border-color .18s;
             }
-            .card:hover {border-color: var(--accent-line); transform: translateY(-2px); box-shadow: var(--shadow);}
+            .card:hover {border-color: var(--accent-line);}
             .card h3 {font-family: var(--mono); font-size: .92rem; font-weight: 500; letter-spacing: -.01em;}
             .card h3 a {text-decoration: none; color: var(--accent);}
             .card p {font-size: .89rem; line-height: 1.6; color: var(--muted); margin: 0;}
 
             /* ---------- figures ---------- */
             figure {margin: 1.5rem 0;}
-            figure img {display: block; width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 9px; background: var(--surface);}
+            figure a.zoom {display: block;}
+            figcaption a {font-size: .84rem; white-space: nowrap;}
+            figure img {display: block; width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 9px; background: #fff;}
             figcaption {margin-top: .6rem; font-size: .86rem; line-height: 1.55; color: var(--muted); text-wrap: pretty;}
+            /* clickable regions over a figure. percentages, so they scale with the image */
+            .hotmap .plate {position: relative; display: block; font-size: 0;}
+            .hotmap .hot {
+                position: absolute; left: var(--x); top: var(--y); width: var(--w); height: var(--h);
+                border-radius: 7px; outline: 1px solid var(--accent-line); outline-offset: -1px;
+                transition: background .16s, outline-color .16s, outline-width .16s;
+            }
+            .hotmap .hot:hover, .hotmap .hot:focus-visible {
+                background: var(--accent-glow); outline: 2px solid var(--accent);
+            }
+            .hotmap .hot span {position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%);}
+
             .figs {display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; margin: 1.5rem 0;}
             .figs figure {margin: 0;}
 
@@ -238,6 +246,7 @@
 
             @media (prefers-reduced-motion: reduce) {
                 html {scroll-behavior: auto;}
+                ol.pubs li:target {animation: none !important; background: var(--accent-glow);}
                 *, *::before, *::after {animation-duration: .01s !important; animation-delay: 0s !important; transition-duration: .01s !important;}
             }
             @media print {
@@ -266,7 +275,7 @@
             <div class="headline">
                 <div>
                     <h1>Alessio Amaolo</h1>
-                    <p class="role">PhD Candidate @ Princeton University (advised in Electrical and Computer Engineering)</p>
+                    <p class="role">PhD Candidate @ Princeton University (advised by <a href="https://arodriguez.princeton.edu/">Prof. Alejandro Rodriguez</a> in Electrical and Computer Engineering)</p>
                     <nav class="links">
                         <a href="mailto:alessioamaolo@princeton.edu">
                             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 5h20v2.4l-10 5.6L2 7.4V5z"/><path d="M2 9.7l10 5.6 10-5.6V19H2V9.7z"/></svg>
@@ -309,8 +318,34 @@
                <a class="chip" href="...">1</a>                              small outlined link chip
         -->
         <section id="research">
-            <h2>Research Interests</h2>
-            <p class="lead"> I am interested in bounding nanophotonic device performance. I am currently working on developing new inverse design methods by leveraging information from fundamental limits. I am advised by <a href="https://arodriguez.princeton.edu/">Prof. Alejandro Rodriguez.</a> This website primarily exists to host my <a href="cv.pdf">CV</a> and notes. </p>
+            <h2>Research</h2> 
+            <!-- 
+            <p class="lead">I work on the physics of nanophotonic design: what an optical device can be made to do, and how to find a device that does it.</p>
+            <p>.</p>
+
+            <h3>Algorithms, scaling, and benchmarking photonic performance</h3>
+            <p></p>
+
+            <figure class="hotmap">
+                <div class="plate">
+                <img src="images/research/limits-gallery.webp" loading="lazy" alt="Fifteen schematics in a five by three grid, each a different optical context where general-purpose performance limits apply: local density of states, nonlinear optics, Casimir forces, efficiency metrics, distributed Raman, matrix oscillators, heat transfer, communication, multi-objective and multi-material design, mechanical design, cross-sections, absorption, bandwidth response, metasurfaces, and cloaking."/>
+                <a class="hot" style="--x:22.10%; --y:2.74%; --w:16.00%; --h:32.19%" href="#p-raman"><span>Nonlinear optics: Raman scattering</span></a>
+                <a class="hot" style="--x:42.04%; --y:35.50%; --w:16.00%; --h:32.53%" href="#p-shannon"><span>Communication: Shannon capacity</span></a>
+                <a class="hot" style="--x:61.95%; --y:35.50%; --w:16.04%; --h:32.53%" href="#p-heterostructures"><span>Multi-objective and multi-material design</span></a>
+                <a class="hot" style="--x:81.89%; --y:68.61%; --w:16.04%; --h:29.28%" href="#p-cloaking"><span>Cloaking</span></a>
+                </div>
+                <figcaption>Optical contexts that general-purpose limits now reach, each treatable with minimal modification to the same underlying optimization theory. The four outlined panels are mine and link to the corresponding paper; the rest survey work from across the field. From our review in preparation. <a href="images/research/limits-gallery.webp">View full size</a></figcaption>
+            </figure>
+
+
+            <figure>
+                <a class="zoom" href="images/research/duality.webp"><img src="images/research/duality.webp" loading="lazy" alt="A loop of four transformations around a rough, many-peaked optimization landscape. The inverse design problem is rewritten as a quadratically constrained quadratic program over polarization fields, convexified by Lagrange duality into a smooth bowl with a single minimum, and the fields at that minimum are turned back into a material structure used to initialize optimization near the bound."/></a>
+                <figcaption>Limits and design as one loop. The inverse design problem is recast as a quadratically constrained quadratic program over polarization fields, then convexified by Lagrange duality into a program with a unique global optimum. The fields at that optimum carry global information about an optimal device, from which a structure can be inferred and used to initialize local optimization near the bound. <a href="images/research/duality.webp">View full size</a></figcaption>
+            </figure> -->
+
+            <h3>Connecting information theory and photonics.</h3>
+
+            <h3>Design of practical devices.</h3>
         </section>
 
         <section id="publications">
@@ -324,11 +359,11 @@
 		<li> Virally, P., Chao, P., <strong>Amaolo, A.</strong>, Rodriguez, A.W., Molesky, S. <a href="https://arxiv.org/abs/2510.01128">How many channels can a photonic system support?</a> <span class="venue">arXiv:2510.01128, 2025.</span> </li>
 		<li> Molesky, S., Chao, P., <strong>Amaolo, A.</strong>, Rodriguez, A.W. <a href="https://arxiv.org/abs/2504.14083">Inferring structure via duality for photonic inverse design.</a> <span class="venue">arXiv:2504.14083, 2025.</span> </li>
 		<li> Chao, P.*, <strong>Amaolo, A.</strong>*, Molesky, S., Rodriguez, A.W. <a href="https://opg.optica.org/oe/fulltext.cfm?uri=oe-34-5-7337">Bounds as blueprints: towards optimal and accelerated photonic inverse design.</a> <span class="venue">Optics Express, 2026.</span> </li>
-		<li> <strong>Amaolo, A.</strong>*, Chao, P.*, Strekha, B., Clarke, S., Mohajan, J., Molesky, S., Rodriguez, A.W. <a href="https://www.nature.com/articles/s44310-025-00104-2">Maximum Shannon capacity of photonic structures.</a> <span class="venue">npj Nanophotonics, 2026.</span> </li>
-		<li> Strekha, B., <strong>Amaolo, A.</strong>, Mohajan, J., Chao, P., Molesky, S., Rodriguez, A.W. <a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.110.063513">Limitations on bandwidth-integrated passive cloaking.</a> <span class="venue">Physical Review A, 2024.</span> </li>
-		<li> <strong>Amaolo, A.</strong>, Chao, P., Maldonado, T.J., Molesky, S., Rodriguez, A.W. <a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.110.L061501">Physical limits on Raman scattering: the critical role of pump and signal co-design.</a> <span class="venue">Physical Review A Letters, 2024.</span> </li>
+		<li id="p-shannon"> <strong>Amaolo, A.</strong>*, Chao, P.*, Strekha, B., Clarke, S., Mohajan, J., Molesky, S., Rodriguez, A.W. <a href="https://www.nature.com/articles/s44310-025-00104-2">Maximum Shannon capacity of photonic structures.</a> <span class="venue">npj Nanophotonics, 2026.</span> </li>
+		<li id="p-cloaking"> Strekha, B., <strong>Amaolo, A.</strong>, Mohajan, J., Chao, P., Molesky, S., Rodriguez, A.W. <a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.110.063513">Limitations on bandwidth-integrated passive cloaking.</a> <span class="venue">Physical Review A, 2024.</span> </li>
+		<li id="p-raman"> <strong>Amaolo, A.</strong>, Chao, P., Maldonado, T.J., Molesky, S., Rodriguez, A.W. <a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.110.L061501">Physical limits on Raman scattering: the critical role of pump and signal co-design.</a> <span class="venue">Physical Review A Letters, 2024.</span> </li>
 		<li> Maldonado, T.J., Pham, D.N., <strong>Amaolo, A.</strong>, Rodriguez, A.W., T&uuml;reci, H.E. <a href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.110.014508">Negative electrohydrostatic pressure between superconducting bodies.</a> <span class="venue">Physical Review B, 2024.</span> </li>
-		<li> <strong>Amaolo, A.</strong>, Chao, P., Maldonado, T.J., Molesky, S., Rodriguez, A.W. <a href="https://www.degruyter.com/document/doi/10.1515/nanoph-2023-0606/html">Can photonic heterostructures provably outperform single-material geometries?</a> <span class="venue">Nanophotonics, 2024.</span> </li>
+		<li id="p-heterostructures"> <strong>Amaolo, A.</strong>, Chao, P., Maldonado, T.J., Molesky, S., Rodriguez, A.W. <a href="https://www.degruyter.com/document/doi/10.1515/nanoph-2023-0606/html">Can photonic heterostructures provably outperform single-material geometries?</a> <span class="venue">Nanophotonics, 2024.</span> </li>
 		<li> McNicholas, B.J., Nie, C., Jose, A., Oyala, P.H., Takase, M.K., Henling, L.M., Barth, A.T., <strong>Amaolo, A.</strong>, Hadt, R.G., Solomon, E.I., Winkler, J.R., Gray, H.B., Despagnet-Ayoub, E. <a href="https://pubs.acs.org/doi/full/10.1021/acs.inorgchem.2c03066">Boronated Cyanometallates.</a> <span class="venue">Inorganic Chemistry, 2022.</span> </li>
 	    </ol>
         </section>
@@ -382,19 +417,19 @@
                 <h3>Caltech</h3>
                 <ul class="rows">
                     <li><span class="key">Ch21a</span><span>Physical Chemistry, with Prof. Garnet Chan (2019). I wrote some <a href="Ch21_Notes.pdf">notes</a> for the class.</span></li>
-                    <li><span class="key">Ph12c</span><span>Statistical Mechanics, with Prof. Ryan Patterson (2021). <span class="muted">reviews</span> <a class="chip" href="images/ph12/ph12creviews.png">1</a></span></li>
+                    <li><span class="key">Ph12c</span><span>Statistical Mechanics, with Prof. Ryan Patterson (2021). <span class="muted">reviews</span> <a class="chip" href="images/teaching_reviews/ph12/ph12creviews.png">1</a></span></li>
                 </ul>
             </div>
             <div class="group">
                 <h3>Princeton</h3>
                 <ul class="rows">
-                    <li><span class="key">ECE203</span><span>Electronic Circuit Design, Analysis and Implementation (2026). <span class="muted">reviews</span> <a class="chip" href="images/ece203/203_reviews.png">1</a></span></li>
+                    <li><span class="key">ECE203</span><span>Electronic Circuit Design, Analysis and Implementation (2026). <span class="muted">reviews</span> <a class="chip" href="images/teaching_reviews/ece203/203_reviews.png">1</a></span></li>
                     <li><span class="key">ECE531</span><span>Robot Planning Meets Machine Learning (2025). <span class="muted">No reviews (new course reviews are hidden for anonymity).</span></span></li>
-                    <li><span class="key">EGR153</span><span>Foundations of Engineering: Electricity, Magnetism, and Photonics (2024 and 2025). <span class="muted">reviews</span> <a class="chip" href="images/egr153/egr153_1.png">1</a><a class="chip" href="images/egr153/egr153_2.png">2</a></span></li>
-                    <li><span class="key">ECE453</span><span>Optical and Quantum Electronics (2024). <span class="muted">reviews</span> <a class="chip" href="images/ece453/ECE453_reviews.png">1</a></span></li>
-                    <li><span class="key">PHY106</span><span>Electromagnetism (2023). <span class="muted">reviews</span> <a class="chip" href="images/phy106/ph106review3.png">1</a><a class="chip" href="images/phy106/ph106review2.png">2</a></span></li>
-                    <li><span class="key">EEB211</span><span>Introductory Biology and Ecology (2023). <span class="muted">reviews</span> <a class="chip" href="images/eeb211/EEB211_Feedback_1.png">1</a><a class="chip" href="images/eeb211/EEB211_Feedback_2.png">2</a></span></li>
-                    <li><span class="key">CHM201</span><span>General Chemistry (2022). <span class="muted">reviews</span> <a class="chip" href="images/chm201/genchemreview1.png">1</a><a class="chip" href="images/chm201/genchemreview2.png">2</a><a class="chip" href="images/chm201/genchemreview3.png">3</a></span></li>
+                    <li><span class="key">EGR153</span><span>Foundations of Engineering: Electricity, Magnetism, and Photonics (2024 and 2025). <span class="muted">reviews</span> <a class="chip" href="images/teaching_reviews/egr153/egr153_1.png">1</a><a class="chip" href="images/teaching_reviews/egr153/egr153_2.png">2</a></span></li>
+                    <li><span class="key">ECE453</span><span>Optical and Quantum Electronics (2024). <span class="muted">reviews</span> <a class="chip" href="images/teaching_reviews/ece453/ECE453_reviews.png">1</a></span></li>
+                    <li><span class="key">PHY106</span><span>Electromagnetism (2023). <span class="muted">reviews</span> <a class="chip" href="images/teaching_reviews/phy106/ph106review3.png">1</a><a class="chip" href="images/teaching_reviews/phy106/ph106review2.png">2</a></span></li>
+                    <li><span class="key">EEB211</span><span>Introductory Biology and Ecology (2023). <span class="muted">reviews</span> <a class="chip" href="images/teaching_reviews/eeb211/EEB211_Feedback_1.png">1</a><a class="chip" href="images/teaching_reviews/eeb211/EEB211_Feedback_2.png">2</a></span></li>
+                    <li><span class="key">CHM201</span><span>General Chemistry (2022). <span class="muted">reviews</span> <a class="chip" href="images/teaching_reviews/chm201/genchemreview1.png">1</a><a class="chip" href="images/teaching_reviews/chm201/genchemreview2.png">2</a><a class="chip" href="images/teaching_reviews/chm201/genchemreview3.png">3</a></span></li>
                 </ul>
             </div>
         </section>
