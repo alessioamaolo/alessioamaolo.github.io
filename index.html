@@ -391,15 +391,13 @@
         -->
         <section id="research">
             <h2>Research</h2>
-            <p class="lead">I am interested in the physics of nanophotonic design. While inverse-designed or computationally optimized structures have seen remarkable success in manipulating light on small length-scales, the underlying physical mechanisms (and the absolute limits of what is achievable) are not fully understood. I am generally interested in accurately modeling photonic systems and exploring what Maxwell&rsquo;s equations ultimately allow. My ultimate goal is to build a unified theoretical framework for designing, benchmarking, and fabricating nanophotonic devices in realistic engineering contexts.</p>
-            <p>These are a few of my recent interests:</p>
+            <p class="lead">My research focuses on the physical principles governing nanophotonic design. I seek to establish a unified theoretical framework for benchmarking, computationally optimizing, and fabricating photonic devices in practical engineering contexts.</p>
+            <p>My current research directions include:</p>
 
             <details class="drop">
                     <summary><h3>Fundamental limits in photonics</h3></summary>
                     <div class="drop-body">
-                    <p>Inverse design, or computational optimization, can produce devices that are counter-intuitive but high-performing. This is a bottom-up approach: it produces feasible devices without answering whether they are truly optimal, or if expanding our search efforts would yield even greater performance. To answer this, we use a top-down approach: given a problem with certain constraints (area, material, etc.), what is the absolute highest performance physically achievable? These limits provide rigorous performance benchmarks: they certify optimality, predict where performance gains can be found, and can mathematically <a href="#p-gearbox">prove the suboptimality of certain engineering choices</a>.</p>
-
-                    <p>Over the last few years, we have developed this methodology across a wide variety of contexts, from nonlinear scattering to information-capacity objectives.</p>
+                    <p>Computational optimization routinely produces high-performing nanophotonic devices, but local optimization cannot certify if a design is globally optimal. To address this, we compute absolute physical limits based on geometric and material constraints. These theoretical bounds provide rigorous performance benchmarks, predict physical scaling laws, and extract structural data to <a href="#p-blueprints">initialize and accelerate traditional inverse design algorithms</a>.</p>
 
                     <figure class="hotmap">
                         <div class="plate">
@@ -412,17 +410,10 @@
                         <figcaption>Optical contexts that general-purpose limits now reach, each treatable with minimal modification to the same underlying optimization theory. From our review in preparation.</figcaption>
                     </figure>
 
-                    <p>Certifying optimality is only one aspect of these bounds. First, they can predict physical scaling laws with surprising accuracy. Second, and perhaps most surprisingly, they are information-bearing: limits contain structural data which can be extracted to <a href="#p-blueprints">initialize traditional inverse design algorithms</a>.</p>
-
-                    <figure>
-                        <a class="zoom" href="images/research/duality.webp"><img src="images/research/duality.webp" loading="lazy"></a>
-                        <figcaption>Limits and design as one loop. The fields at the bound optimum carry global information about an optimal device, from which a structure can be inferred and used to initialize local optimization near the bound. From our <a href="#p-blueprints">bounds as blueprints</a> paper.</figcaption>
-                    </figure>
-
-                    <p>My recent interests in this area are two-fold:</p>
+                    <p>My ongoing work in this area focuses on:</p>
                     <ol class="plain">
-                        <li><strong>Developing new inverse design algorithms.</strong> How can we extract structural information from limits to perform better structural optimization? This involves applying <a href="#p-inferring">optimization-theory machinery</a> to theorize about how optimal structural features can be extracted, as well as advancing the underlying numerics. <a href="#dolphindes">Our codebase</a> represents the state-of-the-art for calculating fundamental limits in photonics; we are currently expanding it to handle 3D scattering problems for realistic engineering scenarios, alongside developing new numerical algorithms for these generalized limit frameworks.</li>
-                        <li><strong>Understanding fundamental physics.</strong> With the recent maturing of limits methodology, what can limits tell us about what is possible via structuring for a variety of relevant physics problems? Currently I am working on broadband heat transfer, Purcell enhancement, and broadband scattered power.</li>
+                        <li><strong>Inverse design algorithms:</strong> Leveraging <a href="#p-inferring">optimization-theory machinery</a> to extract structural information from limits, and expanding our <a href="#dolphindes">state-of-the-art numerical solvers</a> to address 3D scattering problems in realistic engineering scenarios.</li>
+                        <li><strong>Understanding fundamental physics:</strong> Applying mature limit methodologies to calculate theoretical maxima and scaling laws for broadband radiative heat transfer, Purcell enhancement, and broadband scattered power.</li>
                     </ol>
                     </div>
             </details>
@@ -435,19 +426,14 @@
                         <figcaption>Communication through a photonic system as a set of independent channels. The sender-to-receiver map, mediated by a designable structure, decomposes into channels ordered by singular value, each carrying its own pair of sender and receiver mode profiles. From our paper on <a href="#p-channels">how many channels a photonic system can support</a>.</figcaption>
                     </figure>
 
-                    <p>Recently, I have been interested in how we treat information-theoretic objectives in photonics. Information theory is the foundation of communication, sensing, and imaging. However, when addressing these topics, which inherently rely on physical photonic devices like antennas, sensors, and camera front-ends, we typically optimize proxy metrics such as signal-to-noise ratio, resolution, power transfer, or the number of available modes, rather than the information capacity itself.</p>
+                    <p>Conventional photonic design for communication and sensing typically optimizes proxy metrics such as signal-to-noise ratio or resolution. I am interested in optimizing photonic structures directly for information-theoretic objectives. In recent work, we established frameworks to <a href="#p-shannon">bound and co-optimize the physical structuring and channel power allocations</a> for photonic communication. We also expanded this methodology to address the <a href="#p-mutual">phase-restricted and incoherent-source channel laws</a> relevant to near-field sensing and imaging.</p>
 
-                    <p>I argue that we should instead optimize photonic structures directly for information-theoretic objectives. In our recent work on the <a href="#p-shannon">maximum Shannon capacity of photonic structures</a>, we demonstrated how information theory can be explicitly linked to physical structural design. This framework allowed us to derive an expression for the photonic Shannon capacity (the absolute maximum data rate for a given photonic communication problem) and simultaneously co-optimize the material structure alongside the power allocation of each channel. Applying the bounding methodologies discussed above, we were then able to establish rigorous limits on Shannon capacity across all possible photonic structures.</p>
-
-                    <p>In recent research focusing on <a href="#p-mutual">optically incoherent photonic mutual information</a>, we explored how this optimization problem shifts when source control is restricted and channel laws become more complex. Specifically, we examined scenarios highly relevant to near-field sensing and imaging where the receiver cannot measure the optical phase, the sources are incoherent, or both. While these present significantly tougher information-theoretic challenges, they yield precise conclusions regarding how near-field sensors and imaging equipment should be structured.</p>
-
-                    <p>This research is in its early stages. I&rsquo;m broadly interested in:</p>
-                    <ul class="plain">
-                        <li>How can realistic information-theoretic photonic problems be rigorously mathematically defined?</li>
-                        <li>How can we efficiently apply inverse design to these specific objectives, and how do the resulting structures perform compared to those derived from standard proxy objectives?</li>
-                        <li>How can these formulations benefit realistic engineering scenarios? For instance, could an information-theoretic approach yield strictly superior near-field sensors, or enable the design of ultra-high-bandwidth silicon photonic communication devices?</li>
-                        <li>Can we apply a limits formulation to calculate fundamental bounds on information-theoretic quantities? Similar to bounds on conventional metrics like the Purcell factor, are these limits tight enough to supply structural information for device design?</li>
-                    </ul>
+                    <p>I am broadly interested in:</p>
+                    <ol class="plain">
+                        <li>Formulating rigorous mathematical definitions and efficient inverse design algorithms for direct information-theoretic objectives.</li>
+                        <li>Calculating fundamental limits on information capacity and studying how these limits supply structural blueprints for device design (e.g., antennas).</li>
+                        <li>Applying these formulations to realistic engineering contexts, such as ultra-high-bandwidth silicon photonics and near-field sensors.</li>
+                    </ol>
                 </div>
             </details>
 
