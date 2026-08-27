@@ -185,6 +185,14 @@
             ul.plain {list-style: none; padding: 0; margin: 0;}
             ul.plain > li {position: relative; padding-left: 1.15rem; margin: .55rem 0;}
             ul.plain > li::before {content: ""; position: absolute; left: 0; top: .82em; width: .45rem; height: 1px; background: var(--accent); opacity: .8;}
+            /* numbered sibling: same idiom, mono accent numerals */
+            ol.plain {list-style: none; padding: 0; margin: .2rem 0 0; counter-reset: item;}
+            ol.plain > li {position: relative; padding-left: 1.75rem; margin: .8rem 0; counter-increment: item;}
+            ol.plain > li::before {
+                content: counter(item) "."; position: absolute; left: .1rem; top: .34em;
+                font-family: var(--mono); font-size: .82rem; color: var(--accent); opacity: .85;
+                font-variant-numeric: tabular-nums;
+            }
 
             /* ---------- row lists (education, teaching) ---------- */
             ul.rows {list-style: none; padding: 0; margin: 0;}
@@ -214,7 +222,17 @@
                 padding: .95rem 1.05rem; border: 1px solid var(--rule); border-radius: 11px;
                 background: var(--surface); transition: border-color .18s;
             }
-            .card:hover {border-color: var(--accent-line);}
+            .card:hover, .card:focus-within {border-color: var(--accent-line);}
+            .card {scroll-margin-top: 4.6rem;}
+            /* arriving from a citation link, same one-shot glow the publication rows use */
+            @keyframes cite-glow-card {
+                from {background: var(--accent-glow); box-shadow: 0 0 0 1px var(--accent-line);}
+                to   {background: var(--surface);     box-shadow: 0 0 0 1px transparent;}
+            }
+            .card:target {animation: cite-glow-card 2.4s ease-out 1;}
+            .card.linked {cursor: pointer;}
+            /* hovering anywhere in the card underlines its title, so the target is obvious */
+            .card.linked:hover h3 a {text-decoration: underline; text-decoration-color: var(--accent-line); text-decoration-thickness: 1px; text-underline-offset: .17em;}
             .card h3 {font-family: var(--mono); font-size: .92rem; font-weight: 500; letter-spacing: -.01em;}
             .card h3 a {text-decoration: none; color: var(--accent);}
             .card p {font-size: .89rem; line-height: 1.6; color: var(--muted); margin: 0;}
@@ -261,7 +279,6 @@
             /* ---------- figures ---------- */
             figure {margin: 1.5rem 0;}
             figure a.zoom {display: block;}
-            figcaption a {font-size: .84rem; white-space: nowrap;}
             figure img {display: block; width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 9px; background: #fff;}
             figcaption {margin-top: .6rem; font-size: .86rem; line-height: 1.55; color: var(--muted); text-wrap: pretty;}
             /* clickable regions over a figure. percentages, so they scale with the image */
@@ -282,10 +299,16 @@
             footer {display: flex; flex-wrap: wrap; gap: .4rem 1rem; justify-content: space-between; color: var(--muted); font-size: .88rem; padding-top: 1.4rem;}
             footer a {text-decoration: none; color: var(--muted);}
             footer a:hover {color: var(--accent);}
+            /* colophon: its own line under the footer row */
+            footer .colophon {
+                flex-basis: 100%; text-align: right; margin-top: .15rem;
+                font-family: var(--mono); font-size: .7rem; line-height: 1.5;
+                letter-spacing: .005em; text-wrap: pretty; opacity: .5;
+            }
 
             @media (prefers-reduced-motion: reduce) {
                 html {scroll-behavior: auto;}
-                ol.pubs li:target {animation: none !important; background: var(--accent-glow);}
+                ol.pubs li:target, .card:target {animation: none !important; background: var(--accent-glow);}
                 *, *::before, *::after {animation-duration: .01s !important; animation-delay: 0s !important; transition-duration: .01s !important;}
                 details.drop::details-content {transition-duration: .01s !important;}
             }
@@ -349,7 +372,7 @@
             </div>
             <p class="status">
                 <span class="dot"></span>
-                <span><strong>On the postdoc market.</strong> Seeking positions starting Fall 2027. <a href="mailto:alessioamaolo@princeton.edu">alessioamaolo@princeton.edu</a></span>
+                <span><strong>On the postdoc market.</strong> Seeking positions starting Fall 2027.</span>
             </p>
         </header>
 
@@ -357,6 +380,7 @@
                <h3>Subtitle</h3>                                             prose subheading
                <p class="lead">...</p>                                       slightly larger intro paragraph
                <ul class="plain"><li>...</li></ul>                           accent-tick list
+               <ol class="plain"><li>...</li></ol>                           the numbered version
                <ul class="rows"><li><span class="key">label</span><span>...  two-column label + body rows
                <div class="cards"><div class="card"><h3>...                  card grid (card titles render mono)
                <figure><img src="images/x.png" alt=""><figcaption>...        figure with caption
@@ -367,16 +391,15 @@
         -->
         <section id="research">
             <h2>Research</h2>
-            <!--
-            <p class="lead">I work on the physics of nanophotonic design: what an optical device can be made to do, and how to find a device that does it.</p>
-            <p>.</p>
-            -->
+            <p class="lead">I am interested in the physics of nanophotonic design. While inverse-designed or computationally optimized structures have seen remarkable success in manipulating light on small length-scales, the underlying physical mechanisms (and the absolute limits of what is achievable) are not fully understood. I am generally interested in accurately modeling photonic systems and exploring what Maxwell&rsquo;s equations ultimately allow. My ultimate goal is to build a unified theoretical framework for designing, benchmarking, and fabricating nanophotonic devices in realistic engineering contexts.</p>
+            <p>These are a few of my recent interests:</p>
 
             <details class="drop">
-                <summary><h3>Algorithms, scaling, and benchmarking photonic performance</h3></summary>
-                <div class="drop-body">
-                    <!--
-                    <p></p>
+                    <summary><h3>Fundamental limits in photonics.</h3></summary>
+                    <div class="drop-body">
+                    <p>Inverse design, or computational optimization, can produce devices that are counter-intuitive but high-performing. This is a bottom-up approach: it produces feasible devices without answering whether they are truly optimal, or if expanding our search efforts would yield even greater performance. To answer this, we use a top-down approach: given a problem with certain constraints (area, material, etc.), what is the absolute highest performance physically achievable? These limits provide rigorous performance benchmarks: they certify optimality, predict where performance gains can be found, and can mathematically <a href="#p-gearbox">prove the suboptimality of certain engineering choices</a>.</p>
+
+                    <p>Over the last few years, we have developed this methodology across a wide variety of contexts, from nonlinear scattering to information-capacity objectives.</p>
 
                     <figure class="hotmap">
                         <div class="plate">
@@ -386,16 +409,22 @@
                         <a class="hot" style="--x:61.95%; --y:35.50%; --w:16.04%; --h:32.53%" href="#p-heterostructures"><span>Multi-objective and multi-material design</span></a>
                         <a class="hot" style="--x:81.89%; --y:68.61%; --w:16.04%; --h:29.28%" href="#p-cloaking"><span>Cloaking</span></a>
                         </div>
-                        <figcaption>Optical contexts that general-purpose limits now reach, each treatable with minimal modification to the same underlying optimization theory. The four outlined panels are mine and link to the corresponding paper; the rest survey work from across the field. From our review in preparation. <a href="images/research/limits-gallery.webp">View full size</a></figcaption>
+                        <figcaption>Optical contexts that general-purpose limits now reach, each treatable with minimal modification to the same underlying optimization theory. From our review in preparation.</figcaption>
                     </figure>
 
+                    <p>Certifying optimality is only one aspect of these bounds. First, they can predict physical scaling laws with surprising accuracy. Second, and perhaps most surprisingly, they are information-bearing: limits contain structural data which can be extracted to <a href="#p-blueprints">initialize traditional inverse design algorithms</a>.</p>
 
                     <figure>
-                        <a class="zoom" href="images/research/duality.webp"><img src="images/research/duality.webp" loading="lazy" alt="A loop of four transformations around a rough, many-peaked optimization landscape. The inverse design problem is rewritten as a quadratically constrained quadratic program over polarization fields, convexified by Lagrange duality into a smooth bowl with a single minimum, and the fields at that minimum are turned back into a material structure used to initialize optimization near the bound."/></a>
-                        <figcaption>Limits and design as one loop. The inverse design problem is recast as a quadratically constrained quadratic program over polarization fields, then convexified by Lagrange duality into a program with a unique global optimum. The fields at that optimum carry global information about an optimal device, from which a structure can be inferred and used to initialize local optimization near the bound. <a href="images/research/duality.webp">View full size</a></figcaption>
+                        <a class="zoom" href="images/research/duality.webp"><img src="images/research/duality.webp" loading="lazy"></a>
+                        <figcaption>Limits and design as one loop. The fields at the bound optimum carry global information about an optimal device, from which a structure can be inferred and used to initialize local optimization near the bound. From our <a href="#p-blueprints">bounds as blueprints</a> paper.</figcaption>
                     </figure>
-                    -->
-                </div>
+
+                    <p>My recent interests in this area are two-fold.</p>
+                    <ol class="plain">
+                        <li><strong>Developing new inverse design algorithms.</strong> How can we extract structural information from limits to perform better structural optimization? This involves applying <a href="#p-inferring">optimization-theory machinery</a> to theorize about how optimal structural features can be extracted, as well as advancing the underlying numerics. <a href="#dolphindes">Our codebase</a> represents the state-of-the-art for calculating fundamental limits in photonics; we are currently expanding it to handle 3D scattering problems for realistic engineering scenarios, alongside developing new numerical algorithms for these generalized limit frameworks.</li>
+                        <li><strong>Understanding fundamental physics.</strong> With the recent maturing of limits methodology, what can limits tell us about what is possible via structuring for a variety of relevant physics problems? Currently I am working on broadband heat transfer, Purcell enhancement, and broadband scattered power.</li>
+                    </ol>
+                    </div>
             </details>
 
             <details class="drop">
@@ -411,15 +440,15 @@
 
         <section id="publications">
             <h2>Publications</h2>
-            <p class="note">* indicates equal contribution. Also listed on <a href="https://scholar.google.com/citations?hl=en&amp;user=wW7wBxsAAAAJ&amp;view_op=list_works&amp;sortby=pubdate">Google Scholar</a>, which I keep updated.</p>
+            <p class="note">* indicates equal contribution. Also listed on <a href="https://scholar.google.com/citations?hl=en&amp;user=wW7wBxsAAAAJ&amp;view_op=list_works&amp;sortby=pubdate">Google Scholar</a>.</p>
             <ol class="pubs" reversed start="13">
 		<li> Meiburg, A., et al. (including <strong>Amaolo, A.</strong>). The Bound-Beating Benchmark: A continuous, lean-verified benchmark of open quantitative problems. <span class="venue">In preparation.</span> </li>
-		<li> <strong>Amaolo, A.</strong>, Molesky, S., Rodriguez, A.W., Johnson, S.G., Chao, P. The photonic gearbox: ultra-high Purcell enhancement via symmetry breaking. <span class="venue">In preparation.</span> </li>
+		<li id="p-gearbox"> <strong>Amaolo, A.</strong>, Molesky, S., Rodriguez, A.W., Johnson, S.G., Chao, P. The photonic gearbox: ultra-high Purcell enhancement via symmetry breaking. <span class="venue">In preparation.</span> </li>
 		<li> Chen, F.J., <strong>Amaolo, A.</strong>, Chao, P., Molesky, S., Lin, Z., Rodriguez, A.W. <a href="https://arxiv.org/abs/2607.13153">Optically Incoherent Photonic Mutual Information.</a> <span class="venue">arXiv:2607.13153, 2026.</span> </li>
 		<li> <strong>Amaolo, A.</strong>, Chen, F., Chao, P., Maldonado, T.J., Strekha, B., Molesky, S., Rodriguez, A.W. Optimal inverse design in nanophotonics: a tutorial. <span class="venue">Advances in Optics and Photonics (invited review paper). In preparation.</span> </li>
 		<li> Virally, P., Chao, P., <strong>Amaolo, A.</strong>, Rodriguez, A.W., Molesky, S. <a href="https://arxiv.org/abs/2510.01128">How many channels can a photonic system support?</a> <span class="venue">arXiv:2510.01128, 2025.</span> </li>
-		<li> Molesky, S., Chao, P., <strong>Amaolo, A.</strong>, Rodriguez, A.W. <a href="https://arxiv.org/abs/2504.14083">Inferring structure via duality for photonic inverse design.</a> <span class="venue">arXiv:2504.14083, 2025.</span> </li>
-		<li> Chao, P.*, <strong>Amaolo, A.</strong>*, Molesky, S., Rodriguez, A.W. <a href="https://opg.optica.org/oe/fulltext.cfm?uri=oe-34-5-7337">Bounds as blueprints: towards optimal and accelerated photonic inverse design.</a> <span class="venue">Optics Express, 2026.</span> </li>
+		<li id="p-inferring"> Molesky, S., Chao, P., <strong>Amaolo, A.</strong>, Rodriguez, A.W. <a href="https://arxiv.org/abs/2504.14083">Inferring structure via duality for photonic inverse design.</a> <span class="venue">arXiv:2504.14083, 2025.</span> </li>
+		<li id="p-blueprints"> Chao, P.*, <strong>Amaolo, A.</strong>*, Molesky, S., Rodriguez, A.W. <a href="https://opg.optica.org/oe/fulltext.cfm?uri=oe-34-5-7337">Bounds as blueprints: towards optimal and accelerated photonic inverse design.</a> <span class="venue">Optics Express, 2026.</span> </li>
 		<li id="p-shannon"> <strong>Amaolo, A.</strong>*, Chao, P.*, Strekha, B., Clarke, S., Mohajan, J., Molesky, S., Rodriguez, A.W. <a href="https://www.nature.com/articles/s44310-025-00104-2">Maximum Shannon capacity of photonic structures.</a> <span class="venue">npj Nanophotonics, 2026.</span> </li>
 		<li id="p-cloaking"> Strekha, B., <strong>Amaolo, A.</strong>, Mohajan, J., Chao, P., Molesky, S., Rodriguez, A.W. <a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.110.063513">Limitations on bandwidth-integrated passive cloaking.</a> <span class="venue">Physical Review A, 2024.</span> </li>
 		<li id="p-raman"> <strong>Amaolo, A.</strong>, Chao, P., Maldonado, T.J., Molesky, S., Rodriguez, A.W. <a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.110.L061501">Physical limits on Raman scattering: the critical role of pump and signal co-design.</a> <span class="venue">Physical Review A Letters, 2024.</span> </li>
@@ -430,11 +459,11 @@
         </section>
 
         <section id="talks">
-            <h2>Invited Talks</h2>
+            <h2>Conference Talks</h2>
             <ul class="plain">
-		<li> <a href="https://congress.metamorphose-vi.org/index.php/component/svisor/?task=showScheduleSvisor&amp;Itemid=156">&ldquo;Communicating through waves: How many optical channels can a photonic device support?&rdquo;</a> <span class="venue">Metamaterials'2026 (20th International Congress on Artificial Materials for Novel Wave Phenomena), New York, 2026.</span> </li>
-		<li> &ldquo;Certificates of Suboptimality &amp; Opportunities for New Photonic Designs.&rdquo; <span class="venue">Photonics North, 2026.</span> </li>
-		<li> <a href="https://metaconferences.org/META26/index.php/META/program">&ldquo;The photonic gearbox: ultra-high local density of states via cylindrical-symmetry breaking.&rdquo;</a> <span class="venue">16th International Conference on Metamaterials, Photonic Crystals and Plasmonics, 2026.</span> </li>
+		<li> <a href="https://congress.metamorphose-vi.org/index.php/component/svisor/?task=showScheduleSvisor&amp;Itemid=156">&ldquo;Communicating through waves: How many optical channels can a photonic device support?&rdquo;</a> <span class="venue">Metamaterials'2026 (20th International Congress on Artificial Materials for Novel Wave Phenomena), New York, 2026 (Invited Talk).</span> </li>
+		<li> &ldquo;Certificates of Suboptimality &amp; Opportunities for New Photonic Designs.&rdquo; <span class="venue">Photonics North, 2026 (Invited Talk).</span> </li>
+		<li> <a href="https://metaconferences.org/META26/index.php/META/program">&ldquo;The photonic gearbox: ultra-high local density of states via cylindrical-symmetry breaking.&rdquo;</a> <span class="venue">16th International Conference on Metamaterials, Photonic Crystals and Plasmonics, 2026 (Invited Talk).</span> </li>
 	    </ul>
         </section>
 
@@ -442,7 +471,7 @@
             <h2>Code</h2>
             <p class="note">Everything lives on my <a href="https://github.com/Alessio-Amaolo">GitHub</a>.</p>
             <div class="cards">
-                <div class="card">
+                <div class="card" id="dolphindes">
                     <h3><a href="https://github.com/physical-design-bounds/dolphindes/tree/main">dolphindes</a></h3>
                     <p>A recent library for calculation of photonic device performance bounds. I am a core contributor / maintainer. Most of my newer publications use Dolphindes to some extent, and I use it as a repository for examples reproducing my results.</p>
                 </div>
@@ -499,6 +528,7 @@
 	<footer>
             <span>Last updated August 2026.</span>
             <a href="#">Back to top &uarr;</a>
+            <small class="colophon">This website was designed with the assistance of Claude Code. All text is my own.</small>
 	</footer>
         </main>
 
@@ -515,18 +545,31 @@
             addEventListener('resize', onScroll, {passive: true});
             onScroll();
 
-            /* ---- whole publication row is clickable when it links somewhere ---- */
-            document.querySelectorAll('ol.pubs > li').forEach(function (li) {
-                var a = li.querySelector('a[href]');
+            /* ---- a whole block acts as its primary link, while inner links and
+                    text selection keep working (publication rows, code cards) ---- */
+            var linkify = function (el, a) {
                 if (!a) return;
-                li.classList.add('linked');
-                li.addEventListener('click', function (e) {
+                el.classList.add('linked');
+                var from = null;
+                el.addEventListener('mousedown', function (e) {from = [e.clientX, e.clientY];});
+                var go = function (e, blank) {
                     if (e.target.closest('a')) return;                 /* real links act normally */
+                    if (from && (Math.abs(e.clientX - from[0]) > 6 ||
+                                 Math.abs(e.clientY - from[1]) > 6)) return;   /* a drag is a selection */
                     var sel = window.getSelection();
                     if (sel && !sel.isCollapsed) return;               /* don't hijack text selection */
-                    if (e.metaKey || e.ctrlKey || e.shiftKey) window.open(a.href, '_blank', 'noopener');
+                    e.preventDefault();
+                    if (blank) window.open(a.href, '_blank', 'noopener');
                     else window.location.href = a.href;
-                });
+                };
+                el.addEventListener('click', function (e) {go(e, e.metaKey || e.ctrlKey || e.shiftKey);});
+                el.addEventListener('auxclick', function (e) {if (e.button === 1) go(e, true);});
+            };
+            document.querySelectorAll('ol.pubs > li').forEach(function (li) {
+                linkify(li, li.querySelector('a[href]'));
+            });
+            document.querySelectorAll('.cards > .card').forEach(function (card) {
+                linkify(card, card.querySelector('h3 a[href]'));       /* the title link, not one in the body */
             });
         })();
         </script>
