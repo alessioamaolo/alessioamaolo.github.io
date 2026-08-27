@@ -395,7 +395,7 @@
             <p>These are a few of my recent interests:</p>
 
             <details class="drop">
-                    <summary><h3>Fundamental limits in photonics.</h3></summary>
+                    <summary><h3>Fundamental limits in photonics</h3></summary>
                     <div class="drop-body">
                     <p>Inverse design, or computational optimization, can produce devices that are counter-intuitive but high-performing. This is a bottom-up approach: it produces feasible devices without answering whether they are truly optimal, or if expanding our search efforts would yield even greater performance. To answer this, we use a top-down approach: given a problem with certain constraints (area, material, etc.), what is the absolute highest performance physically achievable? These limits provide rigorous performance benchmarks: they certify optimality, predict where performance gains can be found, and can mathematically <a href="#p-gearbox">prove the suboptimality of certain engineering choices</a>.</p>
 
@@ -419,7 +419,7 @@
                         <figcaption>Limits and design as one loop. The fields at the bound optimum carry global information about an optimal device, from which a structure can be inferred and used to initialize local optimization near the bound. From our <a href="#p-blueprints">bounds as blueprints</a> paper.</figcaption>
                     </figure>
 
-                    <p>My recent interests in this area are two-fold.</p>
+                    <p>My recent interests in this area are two-fold:</p>
                     <ol class="plain">
                         <li><strong>Developing new inverse design algorithms.</strong> How can we extract structural information from limits to perform better structural optimization? This involves applying <a href="#p-inferring">optimization-theory machinery</a> to theorize about how optimal structural features can be extracted, as well as advancing the underlying numerics. <a href="#dolphindes">Our codebase</a> represents the state-of-the-art for calculating fundamental limits in photonics; we are currently expanding it to handle 3D scattering problems for realistic engineering scenarios, alongside developing new numerical algorithms for these generalized limit frameworks.</li>
                         <li><strong>Understanding fundamental physics.</strong> With the recent maturing of limits methodology, what can limits tell us about what is possible via structuring for a variety of relevant physics problems? Currently I am working on broadband heat transfer, Purcell enhancement, and broadband scattered power.</li>
@@ -428,12 +428,31 @@
             </details>
 
             <details class="drop">
-                <summary><h3>Connecting information theory and photonics.</h3></summary>
-                <div class="drop-body"></div>
+                <summary><h3>Information-theoretic photonics</h3></summary>
+                <div class="drop-body">
+                    <figure>
+                        <img src="images/research/channels.webp" loading="lazy" alt="A sender region and a receiver region, each holding structured material, coupled through a designable mediator region between them. The map between the two is drawn as a stack of channels labelled by singular value sigma one, sigma two, through sigma n, each with its own sender mode profile on the left and receiver mode profile on the right, ordered by decreasing amplitude."/>
+                        <figcaption>Communication through a photonic system as a set of independent channels. The sender-to-receiver map, mediated by a designable structure, decomposes into channels ordered by singular value, each carrying its own pair of sender and receiver mode profiles. From our paper on <a href="#p-channels">how many channels a photonic system can support</a>.</figcaption>
+                    </figure>
+
+                    <p>Recently, I have been interested in how we treat information-theoretic objectives in photonics. Information theory is the foundation of communication, sensing, and imaging. However, when addressing these topics, which inherently rely on physical photonic devices like antennas, sensors, and camera front-ends, we typically optimize proxy metrics such as signal-to-noise ratio, resolution, power transfer, or the number of available modes, rather than the information capacity itself.</p>
+
+                    <p>I argue that we should instead optimize photonic structures directly for information-theoretic objectives. In our recent work on the <a href="#p-shannon">maximum Shannon capacity of photonic structures</a>, we demonstrated how information theory can be explicitly linked to physical structural design. This framework allowed us to derive an expression for the photonic Shannon capacity (the absolute maximum data rate for a given photonic communication problem) and simultaneously co-optimize the material structure alongside the power allocation of each channel. Applying the bounding methodologies discussed above, we were then able to establish rigorous limits on Shannon capacity across all possible photonic structures.</p>
+
+                    <p>In recent research focusing on <a href="#p-mutual">optically incoherent photonic mutual information</a>, we explored how this optimization problem shifts when source control is restricted and channel laws become more complex. Specifically, we examined scenarios highly relevant to near-field sensing and imaging where the receiver cannot measure the optical phase, the sources are incoherent, or both. While these present significantly tougher information-theoretic challenges, they yield precise conclusions regarding how near-field sensors and imaging equipment should be structured.</p>
+
+                    <p>This research is in its early stages. I&rsquo;m broadly interested in:</p>
+                    <ul class="plain">
+                        <li>How can realistic information-theoretic photonic problems be rigorously mathematically defined?</li>
+                        <li>How can we efficiently apply inverse design to these specific objectives, and how do the resulting structures perform compared to those derived from standard proxy objectives?</li>
+                        <li>How can these formulations benefit realistic engineering scenarios? For instance, could an information-theoretic approach yield strictly superior near-field sensors, or enable the design of ultra-high-bandwidth silicon photonic communication devices?</li>
+                        <li>Can we apply a limits formulation to calculate fundamental bounds on information-theoretic quantities? Similar to bounds on conventional metrics like the Purcell factor, are these limits tight enough to supply structural information for device design?</li>
+                    </ul>
+                </div>
             </details>
 
             <details class="drop">
-                <summary><h3>Design of practical devices.</h3></summary>
+                <summary><h3>Design of high-performance photonic devices</h3></summary>
                 <div class="drop-body"></div>
             </details>
         </section>
@@ -444,9 +463,9 @@
             <ol class="pubs" reversed start="13">
 		<li> Meiburg, A., et al. (including <strong>Amaolo, A.</strong>). The Bound-Beating Benchmark: A continuous, lean-verified benchmark of open quantitative problems. <span class="venue">In preparation.</span> </li>
 		<li id="p-gearbox"> <strong>Amaolo, A.</strong>, Molesky, S., Rodriguez, A.W., Johnson, S.G., Chao, P. The photonic gearbox: ultra-high Purcell enhancement via symmetry breaking. <span class="venue">In preparation.</span> </li>
-		<li> Chen, F.J., <strong>Amaolo, A.</strong>, Chao, P., Molesky, S., Lin, Z., Rodriguez, A.W. <a href="https://arxiv.org/abs/2607.13153">Optically Incoherent Photonic Mutual Information.</a> <span class="venue">arXiv:2607.13153, 2026.</span> </li>
+		<li id="p-mutual"> Chen, F.J., <strong>Amaolo, A.</strong>, Chao, P., Molesky, S., Lin, Z., Rodriguez, A.W. <a href="https://arxiv.org/abs/2607.13153">Optically Incoherent Photonic Mutual Information.</a> <span class="venue">arXiv:2607.13153, 2026.</span> </li>
 		<li> <strong>Amaolo, A.</strong>, Chen, F., Chao, P., Maldonado, T.J., Strekha, B., Molesky, S., Rodriguez, A.W. Optimal inverse design in nanophotonics: a tutorial. <span class="venue">Advances in Optics and Photonics (invited review paper). In preparation.</span> </li>
-		<li> Virally, P., Chao, P., <strong>Amaolo, A.</strong>, Rodriguez, A.W., Molesky, S. <a href="https://arxiv.org/abs/2510.01128">How many channels can a photonic system support?</a> <span class="venue">arXiv:2510.01128, 2025.</span> </li>
+		<li id="p-channels"> Virally, P., Chao, P., <strong>Amaolo, A.</strong>, Rodriguez, A.W., Molesky, S. <a href="https://arxiv.org/abs/2510.01128">How many channels can a photonic system support?</a> <span class="venue">arXiv:2510.01128, 2025.</span> </li>
 		<li id="p-inferring"> Molesky, S., Chao, P., <strong>Amaolo, A.</strong>, Rodriguez, A.W. <a href="https://arxiv.org/abs/2504.14083">Inferring structure via duality for photonic inverse design.</a> <span class="venue">arXiv:2504.14083, 2025.</span> </li>
 		<li id="p-blueprints"> Chao, P.*, <strong>Amaolo, A.</strong>*, Molesky, S., Rodriguez, A.W. <a href="https://opg.optica.org/oe/fulltext.cfm?uri=oe-34-5-7337">Bounds as blueprints: towards optimal and accelerated photonic inverse design.</a> <span class="venue">Optics Express, 2026.</span> </li>
 		<li id="p-shannon"> <strong>Amaolo, A.</strong>*, Chao, P.*, Strekha, B., Clarke, S., Mohajan, J., Molesky, S., Rodriguez, A.W. <a href="https://www.nature.com/articles/s44310-025-00104-2">Maximum Shannon capacity of photonic structures.</a> <span class="venue">npj Nanophotonics, 2026.</span> </li>
