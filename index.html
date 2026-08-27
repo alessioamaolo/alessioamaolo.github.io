@@ -115,6 +115,7 @@
             /* prose subheading: direct child of a section, so cards and group labels keep their own h3 */
             section > h3 {font-size: 1.04rem; margin: 1.8rem 0 .5rem; scroll-margin-top: 4.6rem; text-wrap: balance;}
             p {margin: 0 0 .9rem; text-wrap: pretty;}
+            sub, sup {line-height: 0;}
             section {margin-top: 2.9rem; scroll-margin-top: 4.6rem;}
             hr {border: 0; border-top: 1px solid var(--rule); margin: 2.2rem 0 0;}
             a {color: inherit; text-decoration: underline; text-decoration-color: var(--rule); text-decoration-thickness: 1px; text-underline-offset: .17em; transition: color .16s, text-decoration-color .16s;}
@@ -439,7 +440,14 @@
 
             <details class="drop">
                 <summary><h3>Design of high-performance photonic devices</h3></summary>
-                <div class="drop-body"></div>
+                <div class="drop-body">
+                    <figure>
+                        <img src="images/research/gearbox.webp" loading="lazy" alt=""/>
+                        <figcaption>Three inverse-designed cavities: the material density &rho; (top) and the corresponding field magnitude |<em>E</em>(&omega;*)| at the design frequency (bottom). Each confines light without the continuous rotational symmetry of a Bragg onion. From our <a href="#p-gearbox">photonic gearbox</a> paper.</figcaption>
+                    </figure>
+
+                    <p>My broader research goal is to use these computational tools to discover structural mechanisms that definitively outperform established engineering heuristics. My most recent project, the &ldquo;<a href="#p-gearbox">photonic gearbox</a>,&rdquo; illustrates this approach. We demonstrated that continuously symmetric Bragg-onion geometries are strictly suboptimal for maximizing the local density of states, and designed a set of cavities that approach Purcell factors of 10<sup>12</sup> with relatively large mode-volumes. This combination is experimentally vital, as it ensures the enhanced electromagnetic field remains physically accessible to matter that must occupy it, such as emitter ensembles. I am currently extending this framework into three dimensions and studying its robustness to fabrication errors, material loss, and finite source bandwidth.</p>
+                </div>
             </details>
         </section>
 
