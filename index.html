@@ -277,6 +277,25 @@
                 details.drop[open]::details-content {block-size: auto;}
             }
 
+            /* quiet disclosure: no box, just a small arrow and a muted label */
+            details.aside {margin: 1.1rem 0 0;}
+            details.aside > summary {
+                display: inline-flex; align-items: center; gap: .5rem; cursor: pointer;
+                list-style: none; color: var(--muted); font-size: .88rem;
+                transition: color .18s;
+            }
+            details.aside > summary::-webkit-details-marker {display: none;}
+            details.aside > summary::before {
+                content: ""; flex: none; width: .36rem; height: .36rem;
+                border: 1.5px solid currentColor; border-left: 0; border-top: 0;
+                transform: rotate(-45deg); transition: transform .22s ease;
+            }
+            details.aside[open] > summary::before {transform: rotate(45deg);}
+            details.aside > summary:hover {color: var(--accent);}
+            details.aside > summary:focus-visible {outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px;}
+            details.aside[open] > summary + * {margin-top: .7rem;}
+            details.aside[open] > :not(summary) {animation: drop-in .22s ease-out;}
+
             /* ---------- figures ---------- */
             figure {margin: 1.5rem 0;}
             figure a.zoom {display: block;}
@@ -318,7 +337,7 @@
                 /* disclosures print open and unboxed */
                 details.drop {border: 0; margin: 0; background: none;}
                 details.drop > summary::after {display: none;}
-                details.drop > *:not(summary) {display: block !important;}
+                details.drop > *:not(summary), details.aside > *:not(summary) {display: block !important;}
                 details.drop::details-content {block-size: auto !important; content-visibility: visible !important;}
                 details.drop > summary, .drop-body {padding-left: 0; padding-right: 0; border-top: 0;}
                 body {font-size: 10.5pt; background: #fff; color: #000;}
@@ -456,7 +475,7 @@
             <p class="note">* indicates equal contribution. Also listed on <a href="https://scholar.google.com/citations?hl=en&amp;user=wW7wBxsAAAAJ&amp;view_op=list_works&amp;sortby=pubdate">Google Scholar</a>.</p>
             <ol class="pubs" reversed start="13">
 		<li> Meiburg, A., et al. (including <strong>Amaolo, A.</strong>). BoundBeatingBench: A Lean-Formalized Dataset for Improving Theoretical Bounds across Scientific Domains. <span class="venue">In preparation.</span> </li>
-		<li id="p-gearbox"> <strong>Amaolo, A.</strong>, Molesky, S., Rodriguez, A.W., Johnson, S.G., Chao, P. The photonic gearbox: ultra-high Purcell enhancement via symmetry breaking. <span class="venue">In preparation.</span> </li>
+		<li id="p-gearbox"> <strong>Amaolo, A.</strong>, Molesky, S., Rodriguez, A.W., Shaker, G., Johnson, S.G., Chao, P. Gearbox cavities: ultrahigh wave confinement via broken rotational symmetry. <span class="venue">In preparation.</span> </li>
 		<li id="p-mutual"> Chen, F.J., <strong>Amaolo, A.</strong>, Chao, P., Molesky, S., Lin, Z., Rodriguez, A.W. <a href="https://arxiv.org/abs/2607.13153">Optically Incoherent Photonic Mutual Information.</a> <span class="venue">arXiv:2607.13153, 2026.</span> </li>
 		<li> <strong>Amaolo, A.</strong>, Chen, F., Chao, P., Maldonado, T.J., Strekha, B., Molesky, S., Rodriguez, A.W. Optimal inverse design in nanophotonics: a tutorial. <span class="venue">Advances in Optics and Photonics (invited review paper). In preparation.</span> </li>
 		<li id="p-channels"> Virally, P., Chao, P., <strong>Amaolo, A.</strong>, Rodriguez, A.W., Molesky, S. <a href="https://arxiv.org/abs/2510.01128">How many channels can a photonic system support?</a> <span class="venue">arXiv:2510.01128, 2025.</span> </li>
@@ -483,7 +502,7 @@
 
         <section id="code">
             <h2>Code</h2>
-            <p class="note">I believe in writing good code. Everything lives on my <a href="https://github.com/Alessio-Amaolo">GitHub</a>.</p>
+            <p class="note">Everything lives on my <a href="https://github.com/Alessio-Amaolo">GitHub</a>.</p>
             <div class="cards">
                 <div class="card" id="dolphindes">
                     <h3><a href="https://github.com/physical-design-bounds/dolphindes/tree/main">dolphindes</a></h3>
@@ -494,8 +513,11 @@
                     <p>A highly parallelizable (via JAX SPMD distributed array sharding) optimization library for designing photonic metasurfaces for near-field radiative heat transfer (NFRHT). Still a bit sparse, but there will be a lot more code and examples soon.</p>
                 </div>
             </div>
-            <p>We&rsquo;ve all seen it, especially in the natural sciences: a gigantic legacy code base is used and understood by a single senior graduate student. In the rush to produce papers, the code is not maintained, refactored, or documented. When that student graduates, their results can&rsquo;t be reproduced without significant effort. I think good, documented, reproducible code is part of doing good science, part of accelerating the pace of science, and an important part of mentoring junior students.</p>
+            <details class="aside">
+            <summary>On scientific code</summary>
+            <p>I believe in writing good code. We&rsquo;ve all seen it, especially in the natural sciences: a gigantic legacy code base is used and understood by a single senior graduate student. In the rush to produce papers, the code is not maintained, refactored, or documented. When that student graduates, their results can&rsquo;t be reproduced without significant effort. I think good, documented, reproducible code is part of doing good science, part of accelerating the pace of science, and an important part of mentoring junior students.</p>
             <p>The good news is now that LLMs are available, good engineering is a lot easier in the numerical natural sciences! The bad news is that creating a lot of good-looking-but-bad code is also a lot easier. I therefore believe in checking the output of LLMs thoroughly and systematically and taking responsibility for published code. We have a tremendous opportunity to make scientific code great, so let&rsquo;s use it!</p>
+            </details>
         </section>
 
         <section id="about">
